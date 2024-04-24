@@ -1,24 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import ImageGenerater from './components/ImageGenerater';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <div class="container">
+    //   <div class="c-main_div">
+    //       <img src="https://production-cdn.patternbank.com/uploads/masks/size_600/kidswear_onesie.png" class="c-mask-image" />
+    //       <div class="c-pattern-background-image"></div>
+    //   </div>
+
+    // </div>
+    <ImageGenerater/>
   );
 }
 
