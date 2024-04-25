@@ -14,8 +14,8 @@ export const pdfGenerator = (id,fileName) => {
         image:{type :"jpeg",quality:1},
         html2canvas:{scale:2,letterRendering:true},
         jsPDF: {
-          unit: "mm", 
-          format: [210, 214], 
+          unit: "px", 
+          format: [595, 611], 
           orientation: 'portrait' 
       }
     }
