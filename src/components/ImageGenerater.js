@@ -16,16 +16,25 @@ function ImageGenerater() {
     const { fields, append, remove } = useFieldArray({ control, name: "image_data" });
 
     const [imagePreviews, setImagePreviews] = useState({});
+    const [imageNames, setImageNames] = useState({});
     const [rowBackgrounds, setRowBackgrounds] = useState({});
-    // useEffect(() => {
-    //     console.log("imagePreviews", imagePreviews)
-    // }, [imagePreviews])
+    const [rowImageName, setRowImageName] = useState({});
 
-    // useEffect(() => {
-    //     console.log("rowBackgrounds", rowBackgrounds)
-    // }, [rowBackgrounds])
+    useEffect(() => {
+        console.log("imageNames", imageNames)
+    }, [imageNames])
+
+    useEffect(() => {
+        console.log("rowBackgrounds", rowBackgrounds)
+    }, [rowBackgrounds])
 
     const handleImageChange = (e, fieldId) => {
+        console.log("e",e)
+        if (e.target.files && e.target.files[0]) {
+            const imageName = e.target.files[0].name; 
+            console.log("Image name:", imageName.split('.')[0]);
+            setImageNames(prev => ({ ...prev, [fieldId]: imageName.split('.')[0]}));   
+        }
         const file = e.target.files[0];
         if (file && file.type.startsWith('image')) {
             const reader = new FileReader();
@@ -40,12 +49,17 @@ function ImageGenerater() {
         if(!fieldId?.value) return 
         const rowIndex = fieldId?.value.split('.')[1];
         setRowBackgrounds(prev => ({ ...prev, [rowIndex]: imagePreviews[fieldId?.value] }));
+        setRowImageName(prev => ({ ...prev, [rowIndex]: imageNames[fieldId?.value] }));
     }
 
     const handleRemove = index => {
         const newImagePreviews = { ...imagePreviews };
         ['firstimage', 'secondimage', 'thirdimage'].forEach(imgKey => {
             delete newImagePreviews[`${imgKey}.${index}`];
+        });
+        const newImageNames = { ...imageNames };
+        ['firstimage', 'secondimage', 'thirdimage'].forEach(imgKey => {
+            delete newImageNames[`${imgKey}.${index}`];
         });
 
         Object.keys(newImagePreviews).forEach(key => {
@@ -56,7 +70,7 @@ function ImageGenerater() {
                 delete newImagePreviews[key];
             }
         });
-
+        setImageNames(newImageNames);
         setImagePreviews(newImagePreviews);
         remove(index);
     };
@@ -149,17 +163,23 @@ function ImageGenerater() {
                                             <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px'}}>
                                                 <div>
                                                     {imagePreviews[`${imgKey}.${index}`] && (
+                                                        <div className='img-dis'>
                                                         <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                        <p>{imageNames[`${imgKey}.${index}`]}</p>
+                                                        </div>
                                                     )}
                                                 </div>
                                             </Col>
                                             {imgIndex === 2 && imagePreviews[`${imgKey}.${index}`] ?
                                                 <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
-                                                    <div class="c-main_div">
+                                                    <div class="c-main_div img-dis">
                                                         <img src={imagepath} alt='' class="c-mask-image" />
                                                         <div class="c-pattern-background-image" style={{
                                                             backgroundImage: `url(${rowBackgrounds[index]})`,
-                                                        }}></div>
+                                                        }}>
+                                                       
+                                                        </div> 
+                                                        <p>{rowImageName[`${index}`]}</p>
                                                     </div>
                                                 </Col> : ''}
                                         </>
@@ -178,17 +198,21 @@ function ImageGenerater() {
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
                                                         {imagePreviews[`${imgKey}.${index}`] && (
+                                                            <div className='img-dis'>
                                                             <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                            <p>{imageNames[`${imgKey}.${index}`]}</p>
+                                                            </div>
                                                         )}
                                                     </div>
                                                 </Col>
                                                 {imgIndex === 2 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
-                                                        <div class="c-main_div">
+                                                        <div class="c-main_div img-dis">
                                                             <img src={imagepath} alt='' class="c-mask-image" />
                                                             <div class="c-pattern-background-image" style={{
                                                                 backgroundImage: `url(${rowBackgrounds[index]})`,
                                                             }}></div>
+                                                        <p>{rowImageName[`${index}`]}</p>
                                                         </div>
                                                     </Col> : ''}
                                             </>

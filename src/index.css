@@ -28,4 +28,17 @@ body{
 
 }
 
+.img-dis {
+  position: relative;
+}
+
+.img-dis p {
+  position: absolute;
+  bottom: -12px;
+  right: 5px;
+  background: #fff;
+  padding: 0 2px;
+  z-index: 9999;
+}
+
 
