@@ -24,18 +24,18 @@ function ImageGenerater() {
     const [loading, setLoading] = useState(false);
 
 
-    useEffect(() => {
-        console.log("imageNames", imageNames)
-    }, [imageNames])
+    // useEffect(() => {
+    //     console.log("imageNames", imageNames)
+    // }, [imageNames])
 
-    useEffect(() => {
-        console.log("rowBackgrounds", rowBackgrounds)
-    }, [rowBackgrounds])
+    // useEffect(() => {
+    //     console.log("rowBackgrounds", rowBackgrounds)
+    // }, [rowBackgrounds])
 
     const handleImageChange = async (e, fieldId) => {
         if (e.target.files && e.target.files[0]) {
             const imageName = e.target.files[0].name;
-            console.log("Image name:", imageName.split('.')[0]);
+            // console.log("Image name:", imageName.split('.')[0]);
             setImageNames(prev => ({ ...prev, [fieldId]: imageName.split('.')[0] }));
         }
         const file = e.target.files[0];
