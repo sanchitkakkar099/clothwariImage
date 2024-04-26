@@ -42,7 +42,7 @@ function ImageGenerater() {
         formData.append("file", e.target.files[0]);
         if (file.type === 'image/tiff' || file.name.endsWith('.tif')) {
             try {
-                const response = await axios.post('http://localhost:3001/convert-tiff', formData, {
+                const response = await axios.post('http://43.204.194.160/:3001/convert-tiff', formData, {
                     responseType: 'blob'
                 });
                 const blob = response.data;
