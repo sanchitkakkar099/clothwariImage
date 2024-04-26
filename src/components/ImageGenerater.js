@@ -6,7 +6,7 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label
 import imagepath from '../images/MicrosoftTeams-image (4).png'
 import { pdfGenerator } from "../utils/pdfGenerator";
 import axios from 'axios'
-
+import LoaderComponet from "./LoderComponent";
 
 function ImageGenerater() {
     const { control, handleSubmit, reset } = useForm({
@@ -21,6 +21,8 @@ function ImageGenerater() {
     const [imageNames, setImageNames] = useState({});
     const [rowBackgrounds, setRowBackgrounds] = useState({});
     const [rowImageName, setRowImageName] = useState({});
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         console.log("imageNames", imageNames)
@@ -31,7 +33,7 @@ function ImageGenerater() {
     }, [rowBackgrounds])
 
     const handleImageChange = async (e, fieldId) => {
-        console.log("e", e)
+        setLoading(true);
         if (e.target.files && e.target.files[0]) {
             const imageName = e.target.files[0].name;
             console.log("Image name:", imageName.split('.')[0]);
@@ -45,10 +47,12 @@ function ImageGenerater() {
                 const response = await axios.post('http://43.204.194.160:3001/convert-tiff', formData, {
                     responseType: 'blob'
                 });
+                setLoading(false);
                 const blob = response.data;
                 const imageUrl = URL.createObjectURL(blob);
                 setImagePreviews(prev => ({ ...prev, [fieldId]: imageUrl }));
             } catch (error) {
+                setLoading(false);
                 console.log("error", error)
             }
         } else if (file && file.type.startsWith('image')) {
@@ -79,10 +83,12 @@ function ImageGenerater() {
                         canvas.height = height;
                         ctx.drawImage(img, 0, 0, width, height);
                         setImagePreviews(prev => ({ ...prev, [fieldId]: canvas.toDataURL('image/jpeg') }));
+                        setLoading(false);
                     };
                     img.src = e.target.result;
                 } else {
                     setImagePreviews(prev => ({ ...prev, [fieldId]: e.target.result }));
+                    setLoading(false);
                 }
             };
 
@@ -132,6 +138,8 @@ function ImageGenerater() {
     };
 
     return (
+        <>
+        {loading ? <LoaderComponet loading /> : " "}
         <Form onSubmit={handleSubmit(onNext)} className='container'>
             <Card>
                 <CardHeader>
@@ -287,6 +295,7 @@ function ImageGenerater() {
                 </CardFooter>
             </Card>
         </Form>
+        </>
     );
 }
 
