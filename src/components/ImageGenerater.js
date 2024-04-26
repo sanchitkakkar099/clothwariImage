@@ -33,7 +33,6 @@ function ImageGenerater() {
     }, [rowBackgrounds])
 
     const handleImageChange = async (e, fieldId) => {
-        setLoading(true);
         if (e.target.files && e.target.files[0]) {
             const imageName = e.target.files[0].name;
             console.log("Image name:", imageName.split('.')[0]);
@@ -42,7 +41,8 @@ function ImageGenerater() {
         const file = e.target.files[0];
         const formData = new FormData();
         formData.append("file", e.target.files[0]);
-        if (file.type === 'image/tiff' || file.name.endsWith('.tif')) {
+        if (file?.type === 'image/tiff' || file?.name?.endsWith('.tif')) {
+            setLoading(true);
             try {
                 const response = await axios.post('http://43.204.194.160:3001/convert-tiff', formData, {
                     responseType: 'blob'
@@ -56,6 +56,7 @@ function ImageGenerater() {
                 console.log("error", error)
             }
         } else if (file && file.type.startsWith('image')) {
+            setLoading(true);
             const reader = new FileReader();
 
             reader.onload = (e) => {
