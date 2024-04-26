@@ -5,6 +5,8 @@ import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
 import imagepath from '../images/MicrosoftTeams-image (4).png'
 import { pdfGenerator } from "../utils/pdfGenerator";
+import axios from 'axios'
+
 
 function ImageGenerater() {
     const { control, handleSubmit, reset } = useForm({
@@ -28,25 +30,72 @@ function ImageGenerater() {
         console.log("rowBackgrounds", rowBackgrounds)
     }, [rowBackgrounds])
 
-    const handleImageChange = (e, fieldId) => {
-        console.log("e",e)
+    const handleImageChange = async (e, fieldId) => {
+        console.log("e", e)
         if (e.target.files && e.target.files[0]) {
-            const imageName = e.target.files[0].name; 
+            const imageName = e.target.files[0].name;
             console.log("Image name:", imageName.split('.')[0]);
-            setImageNames(prev => ({ ...prev, [fieldId]: imageName.split('.')[0]}));   
+            setImageNames(prev => ({ ...prev, [fieldId]: imageName.split('.')[0] }));
         }
         const file = e.target.files[0];
-        if (file && file.type.startsWith('image')) {
+        const formData = new FormData();
+        formData.append("file", e.target.files[0]);
+        if (file.type === 'image/tiff' || file.name.endsWith('.tif')) {
+            try {
+                const response = await axios.post('http://localhost:3001/convert-tiff', formData, {
+                    responseType: 'blob'
+                });
+                const blob = response.data;
+                const imageUrl = URL.createObjectURL(blob);
+                setImagePreviews(prev => ({ ...prev, [fieldId]: imageUrl }));
+            } catch (error) {
+                console.log("error", error)
+            }
+        } else if (file && file.type.startsWith('image')) {
             const reader = new FileReader();
-            reader.onload = () => {
-                setImagePreviews(prev => ({ ...prev, [fieldId]: reader.result }));
+
+            reader.onload = (e) => {
+                if (file.type === 'image/jpeg') {
+                    const img = new Image();
+                    img.onload = () => {
+                        const maxWidth = 2000;
+                        const maxHeight = 2000;
+                        let { width, height } = img;
+
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height = height * (maxWidth / width);
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxHeight) {
+                                width = width * (maxHeight / height);
+                                height = maxHeight;
+                            }
+                        }
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        setImagePreviews(prev => ({ ...prev, [fieldId]: canvas.toDataURL('image/jpeg') }));
+                    };
+                    img.src = e.target.result;
+                } else {
+                    setImagePreviews(prev => ({ ...prev, [fieldId]: e.target.result }));
+                }
             };
+
             reader.readAsDataURL(file);
         }
+
     };
 
-    const handleSelectedImage = (fieldId) => { 
-        if(!fieldId?.value) return 
+
+
+
+    const handleSelectedImage = (fieldId) => {
+        if (!fieldId?.value) return
         const rowIndex = fieldId?.value.split('.')[1];
         setRowBackgrounds(prev => ({ ...prev, [rowIndex]: imagePreviews[fieldId?.value] }));
         setRowImageName(prev => ({ ...prev, [rowIndex]: imageNames[fieldId?.value] }));
@@ -116,6 +165,7 @@ function ImageGenerater() {
                                                                 field.onChange(e);
                                                                 handleImageChange(e, `${imgKey}.${index}`);
                                                             }}
+                                                            accept="image/tiff, image/jpeg, image/tif"
                                                         />
                                                     </>
                                                 )}
@@ -160,12 +210,12 @@ function ImageGenerater() {
                                 <Row key={field.id} className="justify-content-between align-items-center gy-1">
                                     {['firstimage', 'secondimage', 'thirdimage'].map((imgKey, imgIndex) => (
                                         <>
-                                            <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px'}}>
+                                            <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                 <div>
                                                     {imagePreviews[`${imgKey}.${index}`] && (
                                                         <div className='img-dis'>
-                                                        <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
-                                                        <p>{imageNames[`${imgKey}.${index}`]}</p>
+                                                            <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                            <p>{imageNames[`${imgKey}.${index}`]}</p>
                                                         </div>
                                                     )}
                                                 </div>
@@ -177,8 +227,8 @@ function ImageGenerater() {
                                                         <div class="c-pattern-background-image" style={{
                                                             backgroundImage: `url(${rowBackgrounds[index]})`,
                                                         }}>
-                                                       
-                                                        </div> 
+
+                                                        </div>
                                                         <p>{rowImageName[`${index}`]}</p>
                                                     </div>
                                                 </Col> : ''}
@@ -199,8 +249,8 @@ function ImageGenerater() {
                                                     <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
                                                         {imagePreviews[`${imgKey}.${index}`] && (
                                                             <div className='img-dis'>
-                                                            <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
-                                                            <p>{imageNames[`${imgKey}.${index}`]}</p>
+                                                                <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                                <p>{imageNames[`${imgKey}.${index}`]}</p>
                                                             </div>
                                                         )}
                                                     </div>
@@ -212,7 +262,7 @@ function ImageGenerater() {
                                                             <div class="c-pattern-background-image" style={{
                                                                 backgroundImage: `url(${rowBackgrounds[index]})`,
                                                             }}></div>
-                                                        <p>{rowImageName[`${index}`]}</p>
+                                                            <p>{rowImageName[`${index}`]}</p>
                                                         </div>
                                                     </Col> : ''}
                                             </>
