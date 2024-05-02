@@ -11,8 +11,8 @@ export const pdfGenerator = (id,fileName) => {
     const option = {
         margin:0,
         filename:fileName,
-        image:{type :"jpeg",quality:1},
-        html2canvas:{scale:2,letterRendering:true},
+        image: { type: "jpeg", quality: 0.95 },
+        html2canvas:{scale:4,letterRendering:true},
         jsPDF: {
           unit: "px", 
           format: [595, 611], 

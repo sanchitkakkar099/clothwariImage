@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/lite-1-p.png'
+import imagepath from '../images/MicrosoftTeams-image (4).png'
 import { pdfGenerator } from "../utils/pdfGenerator";
+import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
 import LoaderComponet from "./LoderComponent";
 
 function ImageGenerater() {
+    const componentRef = useRef();
+
     const { control, handleSubmit, reset } = useForm({
         defaultValues: {
             image_data: [{ firstimage: "", secondimage: "", thirdimage: "" }],
@@ -138,6 +141,12 @@ function ImageGenerater() {
         pdfGenerator('pdf', "download.pdf")
     };
 
+    const generatePDF = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: "Documents" ,
+        onAfterPrint: () => alert("Data saved in PDF")
+    });
+
     return (
         <>
         {loading ? <LoaderComponet loading /> : " "}
@@ -248,8 +257,9 @@ function ImageGenerater() {
                         </div>
                     ))}
                     <div id="pdf" style={{ display: "none" }} className='w-100 '>
+                    <div ref={componentRef}>
                         {fields.map((field, index) => (
-                            <div className="w-100 d-flex">
+                            <div className="w-100 d-flex p-1">
                                 <Col md={12}    >
                                     <Row key={field.id} className="justify-content-between align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
                                         {['firstimage', 'secondimage', 'thirdimage'].map((imgKey, imgIndex) => (
@@ -280,6 +290,7 @@ function ImageGenerater() {
                                 </Col>
                             </div>
                         ))}
+                        </div>
                     </div>
                 </CardBody>
                 <CardFooter>
@@ -288,7 +299,7 @@ function ImageGenerater() {
                             <Plus size={14} />
                             <span className="align-middle ms-25">Add Section</span>
                         </Button>
-                        <Button type="submit" color="primary" onClick={exportPDF} >
+                        <Button type="submit" color="primary" onClick={generatePDF} >
                             <span className="align-middle d-sm-inline-block d-none">Create PDF</span>
                         </Button>
 
