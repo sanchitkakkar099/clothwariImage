@@ -3,18 +3,18 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (4).png'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
+import imagepath from '../images/MicrosoftTeams-image (4).png'
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
 import LoaderComponet from "./LoderComponent";
 
-function ImageGenerater() {
+function ImageGenerater2by1() {
     const componentRef = useRef();
 
     const { control, handleSubmit, reset } = useForm({
         defaultValues: {
-            image_data: [{ firstimage: "", secondimage: "", thirdimage: "" }],
+            image_data: [{ firstimage: "" }],
         },
     });
 
@@ -26,19 +26,9 @@ function ImageGenerater() {
     const [rowImageName, setRowImageName] = useState({});
     const [loading, setLoading] = useState(false);
 
-
-    // useEffect(() => {
-    //     console.log("imageNames", imageNames)
-    // }, [imageNames])
-
-    // useEffect(() => {
-    //     console.log("rowBackgrounds", rowBackgrounds)
-    // }, [rowBackgrounds])
-
     const handleImageChange = async (e, fieldId) => {
         if (e.target.files && e.target.files[0]) {
             const imageName = e.target.files[0].name;
-            // console.log("Image name:", imageName.split('.')[0]);
             setImageNames(prev => ({ ...prev, [fieldId]: imageName.split('.')[0] }));
         }
         const file = e.target.files[0];
@@ -113,11 +103,11 @@ function ImageGenerater() {
 
     const handleRemove = index => {
         const newImagePreviews = { ...imagePreviews };
-        ['firstimage', 'secondimage', 'thirdimage'].forEach(imgKey => {
+        ['firstimage'].forEach(imgKey => {
             delete newImagePreviews[`${imgKey}.${index}`];
         });
         const newImageNames = { ...imageNames };
-        ['firstimage', 'secondimage', 'thirdimage'].forEach(imgKey => {
+        ['firstimage'].forEach(imgKey => {
             delete newImageNames[`${imgKey}.${index}`];
         });
 
@@ -138,13 +128,12 @@ function ImageGenerater() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 214mm");
-    }, []);
-
+        setPageStyle("210mm 110mm");
+      }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: "Documents" ,
-        onAfterPrint: () => removePageStyle()    
+        onAfterPrint: () => alert("Data saved in PDF")
     });
 
     return (
@@ -153,11 +142,12 @@ function ImageGenerater() {
         <Form onSubmit={handleSubmit(onNext)} className='container'>
             <Card>
                 <CardHeader>
+                   
                     <div className="d-flex justify-content-between">
                         <div className='mt-1'>
-                            Three Images
+                        One Image
                         </div>
-                        <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "" })}>
+                        <Button color="primary" onClick={() => append({ firstimage: ""})}>
                             <Plus size={14} />
                             <span className="align-middle ms-25">Add Section</span>
                         </Button>
@@ -168,7 +158,7 @@ function ImageGenerater() {
                         <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
                             <Col md={5}>
                                 <Row key={field.id} className="justify-content-between align-items-center">
-                                    {['firstimage', 'secondimage', 'thirdimage'].map((imgKey, imgIndex) => (
+                                    {['firstimage'].map((imgKey, imgIndex) => (
                                         <Col md={12} key={imgIndex}>
                                             <Label className="form-label" htmlFor={`${imgKey}.${index}.title`}>
                                                 {`Image ${imgIndex + 1}`}
@@ -204,9 +194,6 @@ function ImageGenerater() {
                                                     isClearable
                                                     options={[
                                                         { label: "Image 1", value: `firstimage.${index}` },
-                                                        { label: "Image 2", value: `secondimage.${index}` },
-                                                        { label: "Image 3", value: `thirdimage.${index}` },
-
                                                     ]}
                                                     className="react-select"
                                                     classNamePrefix="select"
@@ -229,7 +216,7 @@ function ImageGenerater() {
                             </Col>
                             <Col md={7} style={{ paddingLeft: '1rem', paddingTop: '1rem' }}>
                                 <Row key={field.id} className="justify-content-between align-items-center gy-1">
-                                    {['firstimage', 'secondimage', 'thirdimage'].map((imgKey, imgIndex) => (
+                                    {['firstimage'].map((imgKey, imgIndex) => (
                                         <>
                                             <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                 <div>
@@ -241,7 +228,7 @@ function ImageGenerater() {
                                                     )}
                                                 </div>
                                             </Col>
-                                            {imgIndex === 2 && imagePreviews[`${imgKey}.${index}`] ?
+                                            {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                 <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                     <div class="c-main_div img-dis">
                                                         <img src={imagepath} alt='' class="c-mask-image" />
@@ -265,7 +252,7 @@ function ImageGenerater() {
                             <div className="w-100 d-flex p-1">
                                 <Col md={12}    >
                                     <Row key={field.id} className="justify-content-between align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
-                                        {['firstimage', 'secondimage', 'thirdimage'].map((imgKey, imgIndex) => (
+                                        {['firstimage'].map((imgKey, imgIndex) => (
                                             <>
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
@@ -277,7 +264,7 @@ function ImageGenerater() {
                                                         )}
                                                     </div>
                                                 </Col>
-                                                {imgIndex === 2 && imagePreviews[`${imgKey}.${index}`] ?
+                                                {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                         <div class="c-main_div img-dis">
                                                             <img src={imagepath} alt='' class="c-mask-image" />
@@ -298,7 +285,7 @@ function ImageGenerater() {
                 </CardBody>
                 <CardFooter>
                     <div className="d-flex justify-content-end">
-                        <Button color="primary" className="me-5" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "" })}>
+                        <Button color="primary" className="me-5" onClick={() => append({ firstimage: ""})}>
                             <Plus size={14} />
                             <span className="align-middle ms-25">Add Section</span>
                         </Button>
@@ -314,4 +301,4 @@ function ImageGenerater() {
     );
 }
 
-export default ImageGenerater;
+export default ImageGenerater2by1;

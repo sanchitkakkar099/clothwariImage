@@ -42,7 +42,7 @@ body{
 }
 
 
-@media print {
+/* @media print {
   .page-break {
     margin-top: 1rem;
     display: block;
@@ -51,7 +51,7 @@ body{
 }
 
 @page {
- size: 210mm 215mm;;
+ size: 210mm 295mm;;
   margin: 0.2rem;
-}
+} */
 
