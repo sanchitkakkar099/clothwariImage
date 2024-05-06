@@ -17,21 +17,29 @@ function NavBar(args) {
         <div>
             <Navbar {...args} expand="md" className="my-2 "
                 color="light">
-                <Link to="/" className="navbar-brand">1*1   </Link>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="me-auto" navbar>
-                        {/* <NavItem>
-                            <Link to="/2by2" className="nav-link">2*1</Link>
-                        </NavItem> */}
                         <NavItem>
-                            <Link to="/three" className="nav-link">3*1</Link>
+                            <Link to="/" className="nav-link">One</Link>
                         </NavItem>
                         <NavItem>
-                        <Link to="/five" className="nav-link">5*1</Link>
+                            <Link to="/two" className="nav-link">Two</Link>
                         </NavItem>
                         <NavItem>
-                        <Link to="/seven" className="nav-link">7*1</Link>
+                            <Link to="/three" className="nav-link">Three</Link>
+                        </NavItem>
+                        <NavItem>
+                            <Link to="/four" className="nav-link">Four</Link>
+                        </NavItem>
+                        <NavItem>
+                            <Link to="/five" className="nav-link">Five</Link>
+                        </NavItem>
+                        <NavItem>
+                            <Link to="/six" className="nav-link">Six</Link>
+                        </NavItem>
+                        <NavItem>
+                            <Link to="/seven" className="nav-link">Seven</Link>
                         </NavItem>
                     </Nav>
                 </Collapse>

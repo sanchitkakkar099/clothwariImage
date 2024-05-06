@@ -9,12 +9,12 @@ import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
 import LoaderComponet from "./LoderComponent";
 
-function ImageGenerater2by3() {
+function ImageGeneraterFour() {
     const componentRef = useRef();
 
     const { control, handleSubmit, reset } = useForm({
         defaultValues: {
-            image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "" }],
+            image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: ""}],
         },
     });
 
@@ -102,11 +102,11 @@ function ImageGenerater2by3() {
 
     const handleRemove = index => {
         const newImagePreviews = { ...imagePreviews };
-        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].forEach(imgKey => {
+        ['firstimage', 'secondimage', 'thirdimage', 'forthimage'].forEach(imgKey => {
             delete newImagePreviews[`${imgKey}.${index}`];
         });
         const newImageNames = { ...imageNames };
-        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].forEach(imgKey => {
+        ['firstimage', 'secondimage', 'thirdimage', 'forthimage'].forEach(imgKey => {
             delete newImageNames[`${imgKey}.${index}`];
         });
 
@@ -143,9 +143,9 @@ function ImageGenerater2by3() {
                     <CardHeader>
                         <div className="d-flex justify-content-between">
                             <div className='mt-1'>
-                                Five Images
+                                Four Images
                             </div>
-                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "" })}>
+                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: ""})}>
                                 <Plus size={14} />
                                 <span className="align-middle ms-25">Add Section</span>
                             </Button>
@@ -156,7 +156,7 @@ function ImageGenerater2by3() {
                             <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
                                 <Col md={5}>
                                     <Row key={field.id} className="justify-content-between align-items-center">
-                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
+                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
                                             <Col md={12} key={imgIndex}>
                                                 <Label className="form-label" htmlFor={`${imgKey}.${index}.title`}>
                                                     {`Image ${imgIndex + 1}`}
@@ -195,7 +195,6 @@ function ImageGenerater2by3() {
                                                             { label: "Image 2", value: `secondimage.${index}` },
                                                             { label: "Image 3", value: `thirdimage.${index}` },
                                                             { label: "Image 4", value: `forthimage.${index}` },
-                                                            { label: "Image 5", value: `fifthimage.${index}` },
                                                         ]}
                                                         className="react-select"
                                                         classNamePrefix="select"
@@ -218,8 +217,8 @@ function ImageGenerater2by3() {
                                 </Col>
                                 {loading ? <LoaderComponet loading /> : " "}
                                 <Col md={7} style={{ paddingLeft: '1rem', paddingTop: '1rem' }}>
-                                    <Row key={field.id} className="justify-content-between align-items-center gy-1">
-                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
+                                    <Row key={field.id} className="justify-content-center align-items-center gy-1">
+                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
                                             <>
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div>
@@ -231,7 +230,7 @@ function ImageGenerater2by3() {
                                                         )}
                                                     </div>
                                                 </Col>
-                                                {imgIndex === 4 && imagePreviews[`${imgKey}.${index}`] ?
+                                                {imgIndex === 3 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                         <div class="c-main_div img-dis">
                                                             <img src={imagepath} alt='' class="c-mask-image" />
@@ -254,8 +253,8 @@ function ImageGenerater2by3() {
                                 {fields.map((field, index) => (
                                     <div className="w-100 d-flex p-1">
                                         <Col md={12}    >
-                                            <Row key={field.id} className="justify-content-between align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
-                                                {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
+                                            <Row key={field.id} className="justify-content-center align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
+                                                {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
                                                     <>
                                                         <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                             <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
@@ -267,7 +266,7 @@ function ImageGenerater2by3() {
                                                                 )}
                                                             </div>
                                                         </Col>
-                                                        {imgIndex === 4 && imagePreviews[`${imgKey}.${index}`] ?
+                                                        {imgIndex === 3 && imagePreviews[`${imgKey}.${index}`] ?
                                                             <Col md={6} key={imgIndex + 1} style={{ marginTop: '1px', padding: '2px' }}>
                                                                 <div class="c-main_div img-dis">
                                                                     <img src={imagepath} alt='' class="c-mask-image" />
@@ -304,4 +303,4 @@ function ImageGenerater2by3() {
     );
 }
 
-export default ImageGenerater2by3;
+export default ImageGeneraterFour;

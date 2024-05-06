@@ -3,18 +3,18 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (4).png'
+import imagepath from '../images/MicrosoftTeams-image (4).png';
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
 import LoaderComponet from "./LoderComponent";
 
-function ImageGenerater2by3() {
+function ImageGeneraterFive() {
     const componentRef = useRef();
 
     const { control, handleSubmit, reset } = useForm({
         defaultValues: {
-            image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "" }],
+            image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "", sixthimage: ""}],
         },
     });
 
@@ -25,9 +25,20 @@ function ImageGenerater2by3() {
     const [rowBackgrounds, setRowBackgrounds] = useState({});
     const [rowImageName, setRowImageName] = useState({});
     const [loading, setLoading] = useState(false);
+
+
+    // useEffect(() => {
+    //     console.log("imageNames", imageNames)
+    // }, [imageNames])
+
+    // useEffect(() => {
+    //     console.log("rowBackgrounds", rowBackgrounds)
+    // }, [rowBackgrounds])
+
     const handleImageChange = async (e, fieldId) => {
         if (e.target.files && e.target.files[0]) {
             const imageName = e.target.files[0].name;
+            // console.log("Image name:", imageName.split('.')[0]);
             setImageNames(prev => ({ ...prev, [fieldId]: imageName.split('.')[0] }));
         }
         const file = e.target.files[0];
@@ -102,11 +113,11 @@ function ImageGenerater2by3() {
 
     const handleRemove = index => {
         const newImagePreviews = { ...imagePreviews };
-        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].forEach(imgKey => {
+        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage' ].forEach(imgKey => {
             delete newImagePreviews[`${imgKey}.${index}`];
         });
         const newImageNames = { ...imageNames };
-        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].forEach(imgKey => {
+        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage'].forEach(imgKey => {
             delete newImageNames[`${imgKey}.${index}`];
         });
 
@@ -127,25 +138,26 @@ function ImageGenerater2by3() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 317mm");
+        setPageStyle("210mm 424mm");
     }, []);
+
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
-        onAfterPrint: () => {
-        },
         documentTitle: "Documents",
+        onAfterPrint: () => alert("Data saved in PDF")
     });
 
     return (
         <>
+            {loading ? <LoaderComponet loading /> : " "}
             <Form onSubmit={handleSubmit(onNext)} className='container'>
                 <Card>
                     <CardHeader>
                         <div className="d-flex justify-content-between">
                             <div className='mt-1'>
-                                Five Images
+                                Six Image
                             </div>
-                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "" })}>
+                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "", sixthimage: "",  })}>
                                 <Plus size={14} />
                                 <span className="align-middle ms-25">Add Section</span>
                             </Button>
@@ -155,8 +167,8 @@ function ImageGenerater2by3() {
                         {fields.map((field, index) => (
                             <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
                                 <Col md={5}>
-                                    <Row key={field.id} className="justify-content-between align-items-center">
-                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
+                                    <Row key={field.id} className="justify-content-center align-items-center">
+                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage'].map((imgKey, imgIndex) => (
                                             <Col md={12} key={imgIndex}>
                                                 <Label className="form-label" htmlFor={`${imgKey}.${index}.title`}>
                                                     {`Image ${imgIndex + 1}`}
@@ -196,6 +208,7 @@ function ImageGenerater2by3() {
                                                             { label: "Image 3", value: `thirdimage.${index}` },
                                                             { label: "Image 4", value: `forthimage.${index}` },
                                                             { label: "Image 5", value: `fifthimage.${index}` },
+                                                            { label: "Image 6", value: `sixthimage.${index}` },
                                                         ]}
                                                         className="react-select"
                                                         classNamePrefix="select"
@@ -216,10 +229,9 @@ function ImageGenerater2by3() {
                                         </Col>
                                     </Row>
                                 </Col>
-                                {loading ? <LoaderComponet loading /> : " "}
                                 <Col md={7} style={{ paddingLeft: '1rem', paddingTop: '1rem' }}>
-                                    <Row key={field.id} className="justify-content-between align-items-center gy-1">
-                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
+                                    <Row key={field.id} className="justify-content-center align-items-center gy-1">
+                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage'].map((imgKey, imgIndex) => (
                                             <>
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div>
@@ -231,7 +243,7 @@ function ImageGenerater2by3() {
                                                         )}
                                                     </div>
                                                 </Col>
-                                                {imgIndex === 4 && imagePreviews[`${imgKey}.${index}`] ?
+                                                {imgIndex === 5 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                         <div class="c-main_div img-dis">
                                                             <img src={imagepath} alt='' class="c-mask-image" />
@@ -254,8 +266,8 @@ function ImageGenerater2by3() {
                                 {fields.map((field, index) => (
                                     <div className="w-100 d-flex p-1">
                                         <Col md={12}    >
-                                            <Row key={field.id} className="justify-content-between align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
-                                                {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
+                                            <Row key={field.id} className="justify-content-center align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
+                                                {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage'].map((imgKey, imgIndex) => (
                                                     <>
                                                         <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                             <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
@@ -267,8 +279,8 @@ function ImageGenerater2by3() {
                                                                 )}
                                                             </div>
                                                         </Col>
-                                                        {imgIndex === 4 && imagePreviews[`${imgKey}.${index}`] ?
-                                                            <Col md={6} key={imgIndex + 1} style={{ marginTop: '1px', padding: '2px' }}>
+                                                        {imgIndex === 5 && imagePreviews[`${imgKey}.${index}`] ?
+                                                            <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                                 <div class="c-main_div img-dis">
                                                                     <img src={imagepath} alt='' class="c-mask-image" />
                                                                     <div class="c-pattern-background-image" style={{
@@ -288,7 +300,7 @@ function ImageGenerater2by3() {
                     </CardBody>
                     <CardFooter>
                         <div className="d-flex justify-content-end">
-                            <Button color="primary" className="me-5" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "" })}>
+                            <Button color="primary" className="me-5" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "",  fifthimage: ""})}>
                                 <Plus size={14} />
                                 <span className="align-middle ms-25">Add Section</span>
                             </Button>
@@ -304,4 +316,4 @@ function ImageGenerater2by3() {
     );
 }
 
-export default ImageGenerater2by3;
+export default ImageGeneraterFive;
