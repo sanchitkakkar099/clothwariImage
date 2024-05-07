@@ -3,7 +3,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (6).png'
+import imagepath from '../images/MicrosoftTeams-image (8).png'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
@@ -127,7 +127,7 @@ function ImageGenerater2by3() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 317mm");
+        setPageStyle("210mm 318mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,

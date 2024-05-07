@@ -3,7 +3,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (6).png'
+import imagepath from '../images/MicrosoftTeams-image (8).png'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
@@ -25,7 +25,7 @@ function ImageGeneraterTwo() {
     const [rowBackgrounds, setRowBackgrounds] = useState({});
     const [rowImageName, setRowImageName] = useState({});
     const [loading, setLoading] = useState(false);
-
+    // const [scale, setScale] = useState({ 0: 19, 1: 19 });
 
     // useEffect(() => {
     //     console.log("imageNames", imageNames)
@@ -138,135 +138,105 @@ function ImageGeneraterTwo() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 214mm");
+        setPageStyle("210mm 215mm");
     }, []);
+
+    // const handleSliderChange = (event, index) => {
+    //     console.log('event.target.value', event.target.value, "index", index);
+    //     const newScale = { ...scale, [index]: Number(event.target.value) };
+    //     setScale(newScale);
+    // };
 
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
-        documentTitle: "Documents" ,
-        onAfterPrint: () => removePageStyle()    
+        documentTitle: "Documents",
+        onAfterPrint: () => removePageStyle()
     });
 
     return (
         <>
-        {loading ? <LoaderComponet loading /> : " "}
-        <Form onSubmit={handleSubmit(onNext)} className='container'>
-            <Card>
-                <CardHeader>
-                    <div className="d-flex justify-content-between">
-                        <div className='mt-1'>
-                            Two Images
+            {loading ? <LoaderComponet loading /> : " "}
+            <Form onSubmit={handleSubmit(onNext)} className='container'>
+                <Card>
+                    <CardHeader>
+                        <div className="d-flex justify-content-between">
+                            <div className='mt-1'>
+                                Two Images
+                            </div>
+                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "" })}>
+                                <Plus size={14} />
+                                <span className="align-middle ms-25">Add Section</span>
+                            </Button>
                         </div>
-                        <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "" })}>
-                            <Plus size={14} />
-                            <span className="align-middle ms-25">Add Section</span>
-                        </Button>
-                    </div>
-                </CardHeader>
-                <CardBody className='d-flex flex-wrap '>
-                    {fields.map((field, index) => (
-                        <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
-                            <Col md={5}>
-                                <Row key={field.id} className="justify-content-between align-items-center">
-                                    {['firstimage', 'secondimage'].map((imgKey, imgIndex) => (
-                                        <Col md={12} key={imgIndex}>
-                                            <Label className="form-label" htmlFor={`${imgKey}.${index}.title`}>
-                                                {`Image ${imgIndex + 1}`}
-                                            </Label>
+                    </CardHeader>
+                    <CardBody className='d-flex flex-wrap '>
+                        {fields.map((field, index) => (
+                            <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
+                                <Col md={5}>
+                                    <Row key={field.id} className="justify-content-between align-items-center">
+                                        {['firstimage', 'secondimage'].map((imgKey, imgIndex) => (
+                                            <Col md={12} key={imgIndex}>
+                                                <Label className="form-label" htmlFor={`${imgKey}.${index}.title`}>
+                                                    {`Image ${imgIndex + 1}`}
+                                                </Label>
+                                                <Controller
+                                                    id={`${imgKey}.${index}.title`}
+                                                    name={`${imgKey}.${index}.title`}
+                                                    control={control}
+                                                    render={({ field }) => (
+                                                        <>
+                                                            <Input
+                                                                type="file"
+                                                                placeholder="Upload Image"
+                                                                onChange={(e) => {
+                                                                    field.onChange(e);
+                                                                    handleImageChange(e, `${imgKey}.${index}`);
+                                                                }}
+                                                                accept="image/tiff, image/jpeg, image/tif"
+                                                            />
+                                                        </>
+                                                    )}
+                                                />
+                                            </Col>
+                                        ))}
+                                        <Col md="12" sm="12" className="mb-1">
+                                            <Label for="role">Image Select</Label>
                                             <Controller
-                                                id={`${imgKey}.${index}.title`}
-                                                name={`${imgKey}.${index}.title`}
+                                                id={`image${index}`}
+                                                name={`image${index}`}
                                                 control={control}
-                                                render={({ field }) => (
-                                                    <>
-                                                        <Input
-                                                            type="file"
-                                                            placeholder="Upload Image"
-                                                            onChange={(e) => {
-                                                                field.onChange(e);
-                                                                handleImageChange(e, `${imgKey}.${index}`);
-                                                            }}
-                                                            accept="image/tiff, image/jpeg, image/tif"
-                                                        />
-                                                    </>
+                                                render={({ field: { onChange, value } }) => (
+                                                    <Select
+                                                        isClearable
+                                                        options={[
+                                                            { label: "Image 1", value: `firstimage.${index}` },
+                                                            { label: "Image 2", value: `secondimage.${index}` },
+                                                        ]}
+                                                        className="react-select"
+                                                        classNamePrefix="select"
+                                                        onChange={(selectedOption) => {
+                                                            onChange(selectedOption);
+                                                            handleSelectedImage(selectedOption);
+                                                        }}
+                                                        value={value ? value : null}
+                                                    />
                                                 )}
                                             />
                                         </Col>
-                                    ))}
-                                    <Col md="12" sm="12" className="mb-1">
-                                        <Label for="role">Image Select</Label>
-                                        <Controller
-                                            id={`image${index}`}
-                                            name={`image${index}`}
-                                            control={control}
-                                            render={({ field: { onChange, value } }) => (
-                                                <Select
-                                                    isClearable
-                                                    options={[
-                                                        { label: "Image 1", value: `firstimage.${index}` },
-                                                        { label: "Image 2", value: `secondimage.${index}` },
-                                                    ]}
-                                                    className="react-select"
-                                                    classNamePrefix="select"
-                                                    onChange={(selectedOption) => {
-                                                        onChange(selectedOption);
-                                                        handleSelectedImage(selectedOption);
-                                                    }}
-                                                    value={value ? value : null}
-                                                />
-                                            )}
-                                        />
-                                    </Col>
-                                    <Col md={12} className="mb-md-0 mt-4 d-flex justify-content-end">
-                                        <Button className="btn-icon" color="danger" outline onClick={() => handleRemove(index)}>
-                                            <X size={14} />
-                                            <span className="align-middle ms-25"></span>
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Col>
-                            <Col md={7} style={{ paddingLeft: '1rem', paddingTop: '1rem' }}>
-                                <Row key={field.id} className="justify-content-center align-items-center gy-1">
-                                    {['firstimage', 'secondimage'].map((imgKey, imgIndex) => (
-                                        <>
-                                            <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
-                                                <div>
-                                                    {imagePreviews[`${imgKey}.${index}`] && (
-                                                        <div className='img-dis'>
-                                                            <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
-                                                            <p>{imageNames[`${imgKey}.${index}`]}</p>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </Col>
-                                            {imgIndex === 1 && imagePreviews[`${imgKey}.${index}`] ?
-                                                <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
-                                                    <div class="c-main_div img-dis">
-                                                        <img src={imagepath} alt='' class="c-mask-image" />
-                                                        <div class="c-pattern-background-image" style={{
-                                                            backgroundImage: `url(${rowBackgrounds[index]})`,
-                                                        }}>
-
-                                                        </div>
-                                                        <p>{rowImageName[`${index}`]}</p>
-                                                    </div>
-                                                </Col> : ''}
-                                        </>
-                                    ))}
-                                </Row>
-                            </Col>
-                        </div>
-                    ))}
-                    <div id="pdf" style={{ display: "none" }} className='w-100 '>
-                    <div ref={componentRef}>
-                        {fields.map((field, index) => (
-                            <div className="w-100 d-flex p-1">
-                                <Col md={12}    >
-                                    <Row key={field.id} className="justify-content-center align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
+                                        <Col md={12} className="mb-md-0 mt-4 d-flex justify-content-end">
+                                            <Button className="btn-icon" color="danger" outline onClick={() => handleRemove(index)}>
+                                                <X size={14} />
+                                                <span className="align-middle ms-25"></span>
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                                <Col md={7} style={{ paddingLeft: '1rem', paddingTop: '1rem' }}>
+                                    <Row key={field.id} className="justify-content-center align-items-center gy-1">
                                         {['firstimage', 'secondimage'].map((imgKey, imgIndex) => (
                                             <>
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
-                                                    <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
+                                                    <div>
                                                         {imagePreviews[`${imgKey}.${index}`] && (
                                                             <div className='img-dis'>
                                                                 <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
@@ -281,33 +251,73 @@ function ImageGeneraterTwo() {
                                                             <img src={imagepath} alt='' class="c-mask-image" />
                                                             <div class="c-pattern-background-image" style={{
                                                                 backgroundImage: `url(${rowBackgrounds[index]})`,
-                                                            }}></div>
+                                                                // backgroundSize: `${scale[index]}%`
+                                                            }}>
+
+                                                            </div>
                                                             <p>{rowImageName[`${index}`]}</p>
                                                         </div>
                                                     </Col> : ''}
                                             </>
                                         ))}
                                     </Row>
+                                    {/* <Input key={index} type='range' min='0' max='100' value={scale[index]} onChange={(e) => handleSliderChange(e, index)} /> */}
                                 </Col>
                             </div>
                         ))}
-                        </div>
-                    </div>
-                </CardBody>
-                <CardFooter>
-                    <div className="d-flex justify-content-end">
-                        <Button color="primary" className="me-5" onClick={() => append({ firstimage: "", secondimage: "" })}>
-                            <Plus size={14} />
-                            <span className="align-middle ms-25">Add Section</span>
-                        </Button>
-                        <Button type="submit" color="primary" onClick={generatePDF} >
-                            <span className="align-middle d-sm-inline-block d-none">Create PDF</span>
-                        </Button>
+                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
+                            <div ref={componentRef}>
+                                {fields.map((field, index) => (
+                                    <div className="w-100 d-flex p-1">
+                                        <Col md={12}    >
+                                            <Row key={field.id} className="justify-content-center align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
+                                                {['firstimage', 'secondimage'].map((imgKey, imgIndex) => (
+                                                    <>
+                                                        <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
+                                                            <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
+                                                                {imagePreviews[`${imgKey}.${index}`] && (
+                                                                    <div className='img-dis'>
+                                                                        <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                                        <p>{imageNames[`${imgKey}.${index}`]}</p>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </Col>
+                                                        {imgIndex === 1 && imagePreviews[`${imgKey}.${index}`] ?
+                                                            <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
+                                                                <div class="c-main_div img-dis">
+                                                                    <img src={imagepath} alt='' class="c-mask-image" />
+                                                                    <div class="c-pattern-background-image" style={{
+                                                                        backgroundImage: `url(${rowBackgrounds[index]})`,
+                                                                        // backgroundSize: `${scale[index]}%`
 
-                    </div>
-                </CardFooter>
-            </Card>
-        </Form>
+                                                                    }}></div>
+                                                                    <p>{rowImageName[`${index}`]}</p>
+                                                                </div>
+                                                            </Col> : ''}
+                                                    </>
+                                                ))}
+                                            </Row>
+                                        </Col>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </CardBody>
+                    <CardFooter>
+                        <div className="d-flex justify-content-end">
+                            <Button color="primary" className="me-5" onClick={() => append({ firstimage: "", secondimage: "" })}>
+                                <Plus size={14} />
+                                <span className="align-middle ms-25">Add Section</span>
+                            </Button>
+                            <Button type="submit" color="primary" onClick={generatePDF} >
+                                <span className="align-middle d-sm-inline-block d-none">Create PDF</span>
+                            </Button>
+
+                        </div>
+                    </CardFooter>
+                </Card>
+            </Form>
         </>
     );
 }
