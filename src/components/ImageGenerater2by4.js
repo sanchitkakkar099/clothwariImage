@@ -47,7 +47,7 @@ function ImageGenerater2by4() {
         if (file?.type === 'image/tiff' || file?.name?.endsWith('.tif')) {
             setLoading(true);
             try {
-                const response = await axios.post('http://43.204.194.160:3001/convert-tiff', formData, {
+                const response = await axios.post('http://15.207.98.156:3001/convert-tiff', formData, {
                     responseType: 'blob'
                 });
                 setLoading(false);
@@ -155,7 +155,7 @@ function ImageGenerater2by4() {
                     <CardHeader>
                         <div className="d-flex justify-content-between">
                             <div className='mt-1'>
-                                Seven Image
+                                Seven Images
                             </div>
                             <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "", sixthimage: "", seventhimage: "", })}>
                                 <Plus size={14} />
