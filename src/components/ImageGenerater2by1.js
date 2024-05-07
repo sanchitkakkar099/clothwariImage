@@ -4,7 +4,7 @@ import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
-import imagepath from '../images/MicrosoftTeams-image (4).png'
+import imagepath from '../images/MicrosoftTeams-image (6).png'
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
 import LoaderComponet from "./LoderComponent";
