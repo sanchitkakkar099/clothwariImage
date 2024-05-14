@@ -138,7 +138,7 @@ function ImageGeneraterFive() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 424mm");
+        setPageStyle("210mm 316mm");
     }, []);
 
     const generatePDF = useReactToPrint({
@@ -280,7 +280,7 @@ function ImageGeneraterFive() {
                                                             </div>
                                                         </Col>
                                                         {imgIndex === 5 && imagePreviews[`${imgKey}.${index}`] ?
-                                                            <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
+                                                            <Col md={12} key={imgIndex + 1} style={{ marginTop: '10px', padding: '2px' }}>
                                                                 <div class="c-main_div img-dis">
                                                                     <img src={imagepath} alt='' class="c-mask-image" />
                                                                     <div class="c-pattern-background-image" style={{

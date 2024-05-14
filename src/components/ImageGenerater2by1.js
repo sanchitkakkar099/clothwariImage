@@ -128,7 +128,7 @@ function ImageGenerater2by1() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 111mm");
+        setPageStyle("110mm 223mm");
       }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -254,7 +254,7 @@ function ImageGenerater2by1() {
                                     <Row key={field.id} className="justify-content-between align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
                                         {['firstimage'].map((imgKey, imgIndex) => (
                                             <>
-                                                <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
+                                                <Col md={12} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
                                                         {imagePreviews[`${imgKey}.${index}`] && (
                                                             <div className='img-dis'>
@@ -265,7 +265,7 @@ function ImageGenerater2by1() {
                                                     </div>
                                                 </Col>
                                                 {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
-                                                    <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
+                                                    <Col md={12} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                         <div class="c-main_div img-dis">
                                                             <img src={imagepath} alt='' class="c-mask-image" />
                                                             <div class="c-pattern-background-image" style={{

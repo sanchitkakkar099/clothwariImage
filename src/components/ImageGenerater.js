@@ -3,7 +3,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (8).png'
+import imagepath from '../images/MicrosoftTeams-image (8)-new.png'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
@@ -268,17 +268,17 @@ function ImageGenerater() {
                                         {['firstimage', 'secondimage', 'thirdimage'].map((imgKey, imgIndex) => (
                                             <>
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
-                                                    <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
+                                                    <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)} style={{border: '1px solid black'}}>
                                                         {imagePreviews[`${imgKey}.${index}`] && (
                                                             <div className='img-dis'>
-                                                                <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                                <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
                                                                 <p>{imageNames[`${imgKey}.${index}`]}</p>
                                                             </div>
                                                         )}
                                                     </div>
                                                 </Col>
                                                 {imgIndex === 2 && imagePreviews[`${imgKey}.${index}`] ?
-                                                    <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
+                                                    <Col md={6} key={imgIndex + 1} style={{ marginTop: '6px', padding: '2px' }}>
                                                         <div class="c-main_div img-dis">
                                                             <img src={imagepath} alt='' class="c-mask-image" />
                                                             <div class="c-pattern-background-image" style={{

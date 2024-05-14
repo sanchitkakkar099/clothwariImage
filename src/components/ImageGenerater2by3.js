@@ -3,7 +3,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (8).png'
+import imagepath from '../images/MicrosoftTeams-image (8)-new.png'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
@@ -127,7 +127,7 @@ function ImageGenerater2by3() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 318mm");
+        setPageStyle("210mm 319mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -268,7 +268,7 @@ function ImageGenerater2by3() {
                                                             </div>
                                                         </Col>
                                                         {imgIndex === 4 && imagePreviews[`${imgKey}.${index}`] ?
-                                                            <Col md={6} key={imgIndex + 1} style={{ marginTop: '1px', padding: '2px' }}>
+                                                            <Col md={6} key={imgIndex + 1} style={{ marginTop: '6px', padding: '2px' }}>
                                                                 <div class="c-main_div img-dis">
                                                                     <img src={imagepath} alt='' class="c-mask-image" />
                                                                     <div class="c-pattern-background-image" style={{

@@ -127,7 +127,7 @@ function ImageGeneraterFour() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 318mm");
+        setPageStyle("210mm 213mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -267,7 +267,7 @@ function ImageGeneraterFour() {
                                                             </div>
                                                         </Col>
                                                         {imgIndex === 3 && imagePreviews[`${imgKey}.${index}`] ?
-                                                            <Col md={6} key={imgIndex + 1} style={{ marginTop: '1px', padding: '2px' }}>
+                                                            <Col md={12} key={imgIndex + 1} style={{ marginTop: '15px', padding: '2px' }}>
                                                                 <div class="c-main_div img-dis">
                                                                     <img src={imagepath} alt='' class="c-mask-image" />
                                                                     <div class="c-pattern-background-image" style={{
