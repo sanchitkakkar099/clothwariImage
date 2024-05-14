@@ -262,7 +262,7 @@ function ImageGenerater2by4() {
                                 </Col>
                             </div>
                         ))}
-                        <div id="pdf" style={{ display: "" }} className='w-100 '>
+                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
                             <div ref={componentRef}>
                                 {fields.map((field, index) => (
                                     <div className="w-100 d-flex p-1">
