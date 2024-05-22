@@ -21,25 +21,10 @@ function NavBar(args) {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="me-auto" navbar>
                         <NavItem>
-                            <Link to="/" className="nav-link">One</Link>
+                            <Link to="/" className="nav-link">National</Link>
                         </NavItem>
                         <NavItem>
-                            <Link to="/two" className="nav-link">Two</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/three" className="nav-link">Three</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/four" className="nav-link">Four</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/five" className="nav-link">Five</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/six" className="nav-link">Six</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/seven" className="nav-link">Seven</Link>
+                            <Link to="/international" className="nav-link">International</Link>
                         </NavItem>
                     </Nav>
                 </Collapse>

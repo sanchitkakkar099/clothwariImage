@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
-import { Plus, X } from 'react-feather';
+import { CloudLightning, Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (8).png'
+import imagepath from '../images/MicrosoftTeams-image (8)-new.png'
+import capture1 from '../images/Capture-1.PNG';
+import capture2 from '../images/Capture-2.PNG';
+import capture3 from '../images/Capture-3.PNG';
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
 import LoaderComponet from "./LoderComponent";
 
-function ImageGeneraterFour() {
+function National() {
     const componentRef = useRef();
 
     const { control, handleSubmit, reset } = useForm({
@@ -56,7 +59,7 @@ function ImageGeneraterFour() {
                     const img = new Image();
                     img.onload = () => {
                         const maxWidth = 2000;
-                        const maxHeight = 2000;
+                        const maxHeight = 1000;
                         let { width, height } = img;
 
                         if (width > height) {
@@ -127,7 +130,7 @@ function ImageGeneraterFour() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 213mm");
+        setPageStyle("210mm 252mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -143,7 +146,7 @@ function ImageGeneraterFour() {
                     <CardHeader>
                         <div className="d-flex justify-content-between">
                             <div className='mt-1'>
-                                Four Images
+                                National
                             </div>
                             <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: ""})}>
                                 <Plus size={14} />
@@ -217,7 +220,7 @@ function ImageGeneraterFour() {
                                 </Col>
                                 {loading ? <LoaderComponet loading /> : " "}
                                 <Col md={7} style={{ paddingLeft: '1rem', paddingTop: '1rem' }}>
-                                    <Row key={field.id} className="justify-content-center align-items-center gy-1">
+                                    <Row key={field.id} className="justify-content-between align-items-center gy-1">
                                         {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
                                             <>
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
@@ -230,7 +233,7 @@ function ImageGeneraterFour() {
                                                         )}
                                                     </div>
                                                 </Col>
-                                                {imgIndex === 3 && imagePreviews[`${imgKey}.${index}`] ?
+                                                {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                         <div class="c-main_div img-dis">
                                                             <img src={imagepath} alt='' class="c-mask-image" />
@@ -251,23 +254,28 @@ function ImageGeneraterFour() {
                         <div id="pdf" style={{ display: "none" }} className='w-100 '>
                             <div ref={componentRef}>
                                 {fields.map((field, index) => (
-                                    <div className="w-100 d-flex p-1">
-                                        <Col md={12}    >
-                                            <Row key={field.id} className="justify-content-center align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
-                                                {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
-                                                    <>
-                                                        <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
-                                                            <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
-                                                                {imagePreviews[`${imgKey}.${index}`] && (
-                                                                    <div className='img-dis'>
-                                                                        <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
-                                                                        <p>{imageNames[`${imgKey}.${index}`]}</p>
-                                                                    </div>
-                                                                )}
+                                    <div className="c-main">
+                                        <div class="box-item">
+                                            {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
+                                                <>  {console.log("imgIndex", imgIndex)}
+                                                    {imagePreviews[`${imgKey}.${index}`] && imgIndex === 0 ?
+                                                        <div className="box-list">
+                                                            <div className="pattern-container c-side_img">
+                                                                <div className='img-dis c-side_box'>
+                                                                    <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
+                                                                    <p>{imageNames[`${imgKey}.${index}`]}</p>
+                                                                </div>
                                                             </div>
-                                                        </Col>
-                                                        {imgIndex === 3 && imagePreviews[`${imgKey}.${index}`] ?
-                                                            <Col md={12} key={imgIndex + 1} style={{ marginTop: '15px', padding: '2px' }}>
+                                                            <div className="pattern-container c-side_img">
+                                                                <div className='img-dis c-side_box'>
+                                                                    <img src={imagePreviews[`secondimage.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
+                                                                    <p>{imageNames[`secondimage.${index}`]}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div> : ''}
+                                                    {imagePreviews[`${imgKey}.${index}`] && imgIndex === 1 ?
+                                                        <div className="box-list c-right-side-model">
+                                                            <div className="c-width c-side_model">
                                                                 <div class="c-main_div img-dis">
                                                                     <img src={imagepath} alt='' class="c-mask-image" />
                                                                     <div class="c-pattern-background-image" style={{
@@ -275,11 +283,29 @@ function ImageGeneraterFour() {
                                                                     }}></div>
                                                                     <p>{rowImageName[`${index}`]}</p>
                                                                 </div>
-                                                            </Col> : ''}
-                                                    </>
-                                                ))}
-                                            </Row>
-                                        </Col>
+                                                            </div>
+                                                        </div> : ' '}
+                                                    {imagePreviews[`${imgKey}.${index}`] && imgIndex === 2 ?
+                                                        <div className="box-list">
+                                                            <div className="c-width c-bottom_img">
+                                                                <div className='img-dis '>
+                                                                    <img src={imagePreviews[`thirdimage.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
+                                                                    <p>{imageNames[`thirdimage.${index}`]}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div> : ''}
+                                                    {imagePreviews[`${imgKey}.${index}`] && imgIndex === 3 ?
+                                                        <div className="box-list">
+                                                            <div className="c-width c-bottom_img">
+                                                                <div className='img-dis '>
+                                                                    <img src={imagePreviews[`forthimage.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
+                                                                    <p>{imageNames[`forthimage.${index}`]}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div> : ' '}
+                                                </>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -303,4 +329,4 @@ function ImageGeneraterFour() {
     );
 }
 
-export default ImageGeneraterFour;
+export default National;

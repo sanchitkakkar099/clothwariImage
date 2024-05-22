@@ -3,42 +3,32 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (8).png';
+import imagepath from '../images/MicrosoftTeams-image (8)-new.png'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
 import LoaderComponet from "./LoderComponent";
 
-function ImageGeneraterFive() {
+function International() {
     const componentRef = useRef();
 
     const { control, handleSubmit, reset } = useForm({
         defaultValues: {
-            image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "", sixthimage: ""}],
+            image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: "" }],
         },
     });
 
     const { fields, append, remove } = useFieldArray({ control, name: "image_data" });
 
     const [imagePreviews, setImagePreviews] = useState({});
+    const [title, setTitle] = useState("");
     const [imageNames, setImageNames] = useState({});
     const [rowBackgrounds, setRowBackgrounds] = useState({});
     const [rowImageName, setRowImageName] = useState({});
     const [loading, setLoading] = useState(false);
-
-
-    // useEffect(() => {
-    //     console.log("imageNames", imageNames)
-    // }, [imageNames])
-
-    // useEffect(() => {
-    //     console.log("rowBackgrounds", rowBackgrounds)
-    // }, [rowBackgrounds])
-
     const handleImageChange = async (e, fieldId) => {
         if (e.target.files && e.target.files[0]) {
             const imageName = e.target.files[0].name;
-            // console.log("Image name:", imageName.split('.')[0]);
             setImageNames(prev => ({ ...prev, [fieldId]: imageName.split('.')[0] }));
         }
         const file = e.target.files[0];
@@ -113,11 +103,11 @@ function ImageGeneraterFive() {
 
     const handleRemove = index => {
         const newImagePreviews = { ...imagePreviews };
-        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage' ].forEach(imgKey => {
+        ['firstimage', 'secondimage', 'thirdimage', 'forthimage'].forEach(imgKey => {
             delete newImagePreviews[`${imgKey}.${index}`];
         });
         const newImageNames = { ...imageNames };
-        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage'].forEach(imgKey => {
+        ['firstimage', 'secondimage', 'thirdimage', 'forthimage'].forEach(imgKey => {
             delete newImageNames[`${imgKey}.${index}`];
         });
 
@@ -138,37 +128,37 @@ function ImageGeneraterFive() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 316mm");
+        setPageStyle("210mm 235mm");
     }, []);
-
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
+        onAfterPrint: () => {
+        },
         documentTitle: "Documents",
-        onAfterPrint: () => alert("Data saved in PDF")
     });
 
     return (
         <>
-            {loading ? <LoaderComponet loading /> : " "}
             <Form onSubmit={handleSubmit(onNext)} className='container'>
                 <Card>
                     <CardHeader>
                         <div className="d-flex justify-content-between">
                             <div className='mt-1'>
-                                Six Images
+                                International
                             </div>
-                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "", sixthimage: "",  })}>
+                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "" })}>
                                 <Plus size={14} />
                                 <span className="align-middle ms-25">Add Section</span>
                             </Button>
                         </div>
                     </CardHeader>
                     <CardBody className='d-flex flex-wrap '>
+                        <Input type='text' placeholder='Input Title' onChange={(e) => setTitle(e.target.value)} />
                         {fields.map((field, index) => (
                             <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
                                 <Col md={5}>
-                                    <Row key={field.id} className="justify-content-center align-items-center">
-                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage'].map((imgKey, imgIndex) => (
+                                    <Row key={field.id} className="justify-content-between align-items-center">
+                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
                                             <Col md={12} key={imgIndex}>
                                                 <Label className="form-label" htmlFor={`${imgKey}.${index}.title`}>
                                                     {`Image ${imgIndex + 1}`}
@@ -207,8 +197,6 @@ function ImageGeneraterFive() {
                                                             { label: "Image 2", value: `secondimage.${index}` },
                                                             { label: "Image 3", value: `thirdimage.${index}` },
                                                             { label: "Image 4", value: `forthimage.${index}` },
-                                                            { label: "Image 5", value: `fifthimage.${index}` },
-                                                            { label: "Image 6", value: `sixthimage.${index}` },
                                                         ]}
                                                         className="react-select"
                                                         classNamePrefix="select"
@@ -229,9 +217,10 @@ function ImageGeneraterFive() {
                                         </Col>
                                     </Row>
                                 </Col>
+                                {loading ? <LoaderComponet loading /> : " "}
                                 <Col md={7} style={{ paddingLeft: '1rem', paddingTop: '1rem' }}>
-                                    <Row key={field.id} className="justify-content-center align-items-center gy-1">
-                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage'].map((imgKey, imgIndex) => (
+                                    <Row key={field.id} className="justify-content-between align-items-center gy-1">
+                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
                                             <>
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div>
@@ -243,7 +232,7 @@ function ImageGeneraterFive() {
                                                         )}
                                                     </div>
                                                 </Col>
-                                                {imgIndex === 5 && imagePreviews[`${imgKey}.${index}`] ?
+                                                {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                         <div class="c-main_div img-dis">
                                                             <img src={imagepath} alt='' class="c-mask-image" />
@@ -263,32 +252,55 @@ function ImageGeneraterFive() {
                         ))}
                         <div id="pdf" style={{ display: "none" }} className='w-100 '>
                             <div ref={componentRef}>
+                                <div class="container-wrapper c-main-content">
+                                    <div class="container text-center">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h1 className='c-text-style'>Textile Design</h1>
+                                                <h2 className='c-text-style c-text-style-h2'>{title}</h2>
+                                                <h3 className='c-text-style'>(IP)</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span className='c-span_div-bott'></span>
+                                </div>
                                 {fields.map((field, index) => (
                                     <div className="w-100 d-flex p-1">
-                                        <Col md={12}    >
-                                            <Row key={field.id} className="justify-content-center align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
-                                                {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage', 'sixthimage'].map((imgKey, imgIndex) => (
+                                        <Col md={12} >
+                                            <Row key={field.id} className="justify-content-between align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
+                                                {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
                                                     <>
-                                                        <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
-                                                            <div onClick={(e) => handleSelectedImage(e, `${imgKey}.${index}`)}>
-                                                                {imagePreviews[`${imgKey}.${index}`] && (
-                                                                    <div className='img-dis'>
-                                                                        <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
-                                                                        <p>{imageNames[`${imgKey}.${index}`]}</p>
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        </Col>
-                                                        {imgIndex === 5 && imagePreviews[`${imgKey}.${index}`] ?
-                                                            <Col md={12} key={imgIndex + 1} style={{ marginTop: '10px', padding: '2px' }}>
-                                                                <div class="c-main_div img-dis">
+                                                        {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
+                                                            <Col md={12} key={imgIndex + 1} style={{ marginTop: '6px', padding: '2px' }}>
+                                                                <div className=' text-center fs-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
+                                                                <div class="c-main_div img-dis" style={{border: '2px solid black'}}>
                                                                     <img src={imagepath} alt='' class="c-mask-image" />
                                                                     <div class="c-pattern-background-image" style={{
                                                                         backgroundImage: `url(${rowBackgrounds[index]})`,
                                                                     }}></div>
-                                                                    <p>{rowImageName[`${index}`]}</p>
+                                                                    {/* <p>{rowImageName[`${index}`]}</p> */}
                                                                 </div>
                                                             </Col> : ''}
+                                                        {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] && rowBackgrounds[index] ?
+                                                            <Col md={12} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
+                                                                {imagePreviews[`${imgKey}.${index}`] && (
+                                                                    <>
+                                                                        <div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
+                                                                        <div className='img-dis'>
+                                                                            <img src={rowBackgrounds[`${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                                            {/* <p>{imageNames[`${imgKey}.${index}`]}</p> */}
+                                                                        </div>
+                                                                    </>
+                                                                )}
+                                                            </Col> : ' '}
+                                                        {imgIndex === 0 && (<div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>)}
+                                                        {imagePreviews[`${imgKey}.${index}`] && (rowBackgrounds[`${index}`] !== imagePreviews[`${imgKey}.${index}`]) && (
+                                                            <Col md={12} key={imgIndex} style={{ marginTop: '2px', marginBottom: '1px', padding: '2px' }}>
+                                                                <div className='img-dis'>
+                                                                    <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black', maxHeight: '263px', height: '100%', overflow: 'hidden', objectFit: 'cover' }} />
+                                                                </div>
+                                                            </Col>
+                                                        )}
                                                     </>
                                                 ))}
                                             </Row>
@@ -300,7 +312,7 @@ function ImageGeneraterFive() {
                     </CardBody>
                     <CardFooter>
                         <div className="d-flex justify-content-end">
-                            <Button color="primary" className="me-5" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "",  fifthimage: ""})}>
+                            <Button color="primary" className="me-5" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "" })}>
                                 <Plus size={14} />
                                 <span className="align-middle ms-25">Add Section</span>
                             </Button>
@@ -316,4 +328,4 @@ function ImageGeneraterFive() {
     );
 }
 
-export default ImageGeneraterFive;
+export default International;
