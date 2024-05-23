@@ -26,6 +26,17 @@ body{
     background-position: 0% 0%;
 
 }
+.c-pattern-background-image-second{
+  left: 2px;
+    top: 1px;
+    width: 99%;
+    height: 99%;
+    position: absolute;
+    background-size: 18%;
+    background-repeat: repeat;
+    background-position: 0% 0%;
+
+}
 
 .img-dis {
   position: relative;

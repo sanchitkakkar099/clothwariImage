@@ -290,7 +290,7 @@ function National() {
                                                             <div className="c-width c-side_model">
                                                                 <div class="c-main_div img-dis">
                                                                     <img src={imagepath} alt='' class="c-mask-image" />
-                                                                    <div class="c-pattern-background-image" style={{
+                                                                    <div class="c-pattern-background-image-second" style={{
                                                                         backgroundImage: `url(${rowBackgrounds[index]})`,
                                                                     }}></div>
                                                                     <p>{rowImageName[`${index}`]}</p>
