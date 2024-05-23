@@ -26,6 +26,7 @@ function International() {
     const [rowBackgrounds, setRowBackgrounds] = useState({});
     const [rowImageName, setRowImageName] = useState({});
     const [loading, setLoading] = useState(false);
+    let temp = 0;
     const handleImageChange = async (e, fieldId) => {
         if (e.target.files && e.target.files[0]) {
             const imageName = e.target.files[0].name;
@@ -128,7 +129,7 @@ function International() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 235mm");
+        setPageStyle("210mm 230mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -267,19 +268,26 @@ function International() {
                                 {fields.map((field, index) => (
                                     <div className="w-100 d-flex p-1">
                                         <Col md={12} >
+                                        {(() => { temp = 0; return null; })()}
                                             <Row key={field.id} className="justify-content-between align-items-center gy-1" style={{ marginTop: '2px', paddingLeft: '11px', paddingRight: '11px' }}>
                                                 {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
                                                     <>
                                                         {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                             <Col md={12} key={imgIndex + 1} style={{ marginTop: '6px', padding: '2px' }}>
-                                                                <div className=' text-center fs-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
-                                                                <div class="c-main_div img-dis" style={{border: '2px solid black'}}>
-                                                                    <img src={imagepath} alt='' class="c-mask-image" />
-                                                                    <div class="c-pattern-background-image" style={{
-                                                                        backgroundImage: `url(${rowBackgrounds[index]})`,
-                                                                    }}></div>
-                                                                    {/* <p>{rowImageName[`${index}`]}</p> */}
+                                                                <div className='text-center fs-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
+                                                                <div class="c-main_div img-dis ">
+                                                                <div className='c-border_style-a c-single_border_style'><span>A</span></div>
+                                                                <div className='c-box-item-3'>
+                                                                    <div  style={{ border: '2px solid black' }}>
+                                                                        <img src={imagepath} alt='' class="c-mask-image" />
+                                                                        <div class="c-pattern-background-image c-pattern_back-ing" style={{
+                                                                            backgroundImage: `url(${rowBackgrounds[index]})`,
+                                                                        }}></div>
+                                                                    </div>
+                                                                    <div className='c-text_rotate-second'><div><span> 10 </span><span> INCHES  </span></div></div>
                                                                 </div>
+                                                                </div>
+                                                                <div class="c-text_rotate-bottom-second">7.5 INCHES</div>
                                                             </Col> : ''}
                                                         {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] && rowBackgrounds[index] ?
                                                             <Col md={12} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
@@ -287,22 +295,33 @@ function International() {
                                                                     <>
                                                                         <div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
                                                                         <div className='img-dis'>
-                                                                            <img src={rowBackgrounds[`${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
-                                                                            {/* <p>{imageNames[`${imgKey}.${index}`]}</p> */}
+                                                                            <div className='c-border_style-a c-single_border_style'><span>A</span></div>
+                                                                            <div className='c-box-item-3'>
+                                                                                <img src={rowBackgrounds[`${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                                                <div className='c-text_rotate-second'><div><span> 10 </span><span> INCHES  </span></div></div>
+                                                                            </div>
                                                                         </div>
                                                                     </>
                                                                 )}
-                                                            </Col> : ' '}
+                                                                <div class="c-text_rotate-bottom-second">7.5 INCHES</div>
+                                                            </Col>
+                                                            : ' '}
                                                         {imgIndex === 0 && (<div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>)}
                                                         {imagePreviews[`${imgKey}.${index}`] && (rowBackgrounds[`${index}`] !== imagePreviews[`${imgKey}.${index}`]) && (
-                                                            <Col md={12} key={imgIndex} style={{ marginTop: '2px', marginBottom: '1px', padding: '2px' }}>
-                                                                <div className='img-dis'>
-                                                                    <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black', maxHeight: '263px', height: '100%', overflow: 'hidden', objectFit: 'cover' }} />
-                                                                </div>
-                                                            </Col>
+                                                            <>
+                                                                <Col md={12} key={imgIndex} style={{ marginTop: '40px', marginBottom: '1px', padding: '2px' }}>
+                                                                    <div className='img-dis c-box-item-3'>
+                                                                        <div className='c-border_style-a'><span>{String.fromCharCode(66 + temp)}</span></div>
+                                                                        <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black', maxHeight: '336px', height: '100%', overflow: 'hidden', objectFit: 'cover' }} />
+                                                                        <div className='c-text_rotate'><div><span> 3.5 </span><span> INCHES  </span></div></div>
+                                                                    </div>
+                                                                </Col>
+                                                                {(() => { temp += 1; return null; })()}
+                                                            </>
                                                         )}
                                                     </>
                                                 ))}
+                                                <div class="c-text_rotate-bottom">7 INCHES</div>
                                             </Row>
                                         </Col>
                                     </div>

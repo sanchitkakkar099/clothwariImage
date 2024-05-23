@@ -3,10 +3,8 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { CloudLightning, Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (8)-new.png'
-import capture1 from '../images/Capture-1.PNG';
-import capture2 from '../images/Capture-2.PNG';
-import capture3 from '../images/Capture-3.PNG';
+import imagepath from '../images/MicrosoftTeams-image (14).png'
+import imagepath2 from '../images/MicrosoftTeams-image (8)-new.png'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
@@ -24,6 +22,7 @@ function National() {
     const { fields, append, remove } = useFieldArray({ control, name: "image_data" });
 
     const [imagePreviews, setImagePreviews] = useState({});
+    const [title, setTitle] = useState("");
     const [imageNames, setImageNames] = useState({});
     const [rowBackgrounds, setRowBackgrounds] = useState({});
     const [rowImageName, setRowImageName] = useState({});
@@ -130,7 +129,7 @@ function National() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 252mm");
+        setPageStyle("210mm 245mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -155,6 +154,7 @@ function National() {
                         </div>
                     </CardHeader>
                     <CardBody className='d-flex flex-wrap '>
+                    <Input type='text' placeholder='Input Title' onChange={(e) => setTitle(e.target.value)} />
                         {fields.map((field, index) => (
                             <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
                                 <Col md={5}>
@@ -236,7 +236,7 @@ function National() {
                                                 {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
                                                         <div class="c-main_div img-dis">
-                                                            <img src={imagepath} alt='' class="c-mask-image" />
+                                                            <img src={imagepath2} alt='' class="c-mask-image" />
                                                             <div class="c-pattern-background-image" style={{
                                                                 backgroundImage: `url(${rowBackgrounds[index]})`,
                                                             }}>
@@ -253,6 +253,18 @@ function National() {
                         ))}
                         <div id="pdf" style={{ display: "none" }} className='w-100 '>
                             <div ref={componentRef}>
+                            <div class="container-wrapper c-main-content" style={{ height:'900px' }}>
+                                    <div class="container text-center">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h1 className='c-text-style'>Textile Design</h1>
+                                                <h2 className='c-text-style c-text-style-h2'>{title}</h2>
+                                                <h3 className='c-text-style'>(IP)</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span className='c-span_div-bott'></span>
+                                </div>
                                 {fields.map((field, index) => (
                                     <div className="c-main">
                                         <div class="box-item">

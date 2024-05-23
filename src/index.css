@@ -16,10 +16,10 @@ body{
 }
 
 .c-pattern-background-image{
-  left: 1px;
+  left: 2px;
     top: 1px;
-    width: 99%;
-    height: 99%;
+    width: 96%;
+    height: 94%;
     position: absolute;
     background-size: 18%;
     background-repeat: repeat;
@@ -40,7 +40,145 @@ body{
   z-index: 9999;
 }
 
+.c-border_style-a{
+  font-size: 25px;
+    line-height: 0;
+    border: 1px solid #000;
+    border-radius: 140px;
+    width: 45px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.c-box-item-3{
+  display: flex;
+  gap: 10px;
+}
+.c-text_rotate{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+}
 
+.c-text_rotate-second {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+}
+.c-text_rotate div{
+  transform: rotate(270deg);
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+.c-text_rotate-second div{
+  transform: rotate(270deg);
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+.c-text_rotate div::after {
+  content: "";
+    display: block;
+    width:131%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    right: 114%;
+}
+.c-text_rotate div::before {
+  content: "";
+    display: block;
+    width: 133%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    bottom: 42%;
+    left: 114%;
+}
+
+.c-text_rotate-second div::after {
+  content: "";
+    display: block;
+    width: 630%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    right: 114%;
+}
+.c-text_rotate-second div::before {
+  content: "";
+    display: block;
+    width: 636%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    bottom: 42%;
+    left: 114%;
+}
+.c-text_rotate-bottom{
+  /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    text-align: center;
+    position: relative;
+}
+
+.c-text_rotate-bottom::after {
+  content: "";
+    display: block;
+    width: 40%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    right: 43px;
+}
+.c-text_rotate-bottom::before {
+  content: "";
+    display: block;
+    width: 39%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    bottom: 42%;
+    left: 51px;
+}
+.c-text_rotate-bottom-second{
+  /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    text-align: center;
+    position: relative;
+}
+
+.c-text_rotate-bottom-second::after {
+  content: "";
+  display: block;
+  width: 41%;
+  height: 2px;
+  background-color: #000;
+  position: absolute;
+  top: 50%;
+  right: 39px;
+}
+.c-text_rotate-bottom-second::before {
+  content: "";
+  display: block;
+  width: 43%;
+  height: 2px;
+  background-color: #000;
+  position: absolute;
+  bottom: 42%;
+  left: 1px;
+}
 /* @media print {
   .page-break {
     margin-top: 1rem;
@@ -71,17 +209,17 @@ body{
 
 .box-list {
   flex: 48%;
-  max-width: 40%;
+  max-width: 38%;
   padding: 10px;
 }
 .c-right-side-model{
-  max-width: 60%;
+  max-width: 61%;
 }
 .pattern-container, .c-width {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 .shirt-image{
   width: 100%;
@@ -91,9 +229,9 @@ body{
   width: 100%;
   height: auto;
 }
-.c-side_model{
+/* .c-side_model{
   height: 100%;
-}
+} */
 /* .c-side_img{
   height: 100%;
   max-height: 285px;
@@ -121,7 +259,7 @@ body{
 }
 
 .container-wrapper {
-  height: 858px;
+  height: 1250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -147,8 +285,16 @@ span.c-span_div-bott {
   background-color: #bd582c;
   width: 102.5%;
   position: absolute;
-  bottom: -4.8%;
+  bottom: -4.2%;
   border-top: 8px solid #e48312;
+}
+.c-single_border_style{
+  margin-bottom: 20px;
+  width: 40px;
+  height: 40px;
+}
+.c-pattern_back-ing {
+  top: 65px;
 }
 @media screen and (max-width: 600px) {
   .box-list {
