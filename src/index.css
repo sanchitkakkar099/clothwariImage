@@ -270,19 +270,20 @@ body{
 }
 
 .container-wrapper {
-  height: 1250px;
+  height: 1260px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .c-text-style{
-  font-size: 6rem;
+  font-size: 5rem;
   color: #eabaa5;
   -webkit-text-stroke: 2px #c3673f;
   /* text-shadow: -2px -2px 0 #c3673f, 2px -2px 0 #c3673f, -2px 2px 0 #c3673f, 2px 0px 0 #c3673f; */
 }
 .c-text-style-h2 {
+  margin-bottom: 40px;
   border-bottom: 3px solid #e7e7e7;
   display: inline-block;  
   line-height: 5rem;

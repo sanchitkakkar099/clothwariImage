@@ -129,7 +129,7 @@ function National() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("355.6mm", "152mm");
+        setPageStyle("1278px", "570px");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -235,7 +235,7 @@ function National() {
                                                     </div>
                                                 </Col>
                                                 {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
-                                                    <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
+                                                    <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px',  padding: '2px' }}>
                                                         <div class="c-main_div img-dis" >
                                                             <img src={imagepath2} alt='' class="c-mask-image"  style={{ border: '1px solid black' }}/>
                                                             <div class="c-pattern-background-image" style={{
@@ -254,42 +254,40 @@ function National() {
                         ))}
                         <div id="pdf" style={{ display: "none" }} className='w-100 '>
                             <div ref={componentRef}>
-                                <div class="container-wrapper c-main-content" style={{ height: '558px' }}>
+                                <div class="container-wrapper c-main-content" style={{ height: '554px' }}>
                                     <div class="container text-center">
                                         <div class="row">
                                             <div class="col">
-                                                <h1><img src={logo} alt='logo' width='10%'/></h1>
+                                                <h1><img src={logo} alt='logo' width='20%'/></h1>
                                                 <h1 className='c-text-style'>Textile Design</h1>
                                                 <h2 className='c-text-style c-text-style-h2'>{title}</h2>
-                                                <h3 className='c-text-style' style={{marginBottom : '40px'}}>(IP)</h3>
                                             </div>
                                         </div>
                                     </div>
                                     <span className='c-span_div-bott'></span>
                                 </div>
                                 {fields.map((field, index) => (
-                                    <Col md={12} style={{ paddingLeft: '8rem', paddingTop: '1rem', paddingRight: '8rem'}}>
+                                    <Col md={12} style={{ paddingLeft: '8rem', paddingRight: '8rem'}}>
                                         <Row key={field.id} className="justify-content-between align-items-center gy-1">
                                             {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
                                                 <>
-                                                    <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
-                                                        <div>
-                                                            {imagePreviews[`${imgKey}.${index}`] && (
+                                                {imagePreviews[`${imgKey}.${index}`] && 
+                                                    <Col md={6} key={imgIndex} style={{ marginTop: '46px', marginBottom: '2px', padding: '2px', width: '49.5%' }}>
+                                                        <div>                  
                                                                 <div className='img-dis'>
                                                                     <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
                                                                     <p>{imageNames[`${imgKey}.${index}`]}</p>
                                                                 </div>
-                                                            )}
                                                         </div>
                                                     </Col>
+                                                }
                                                     {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
-                                                        <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
+                                                        <Col md={6} key={imgIndex + 1} style={{ marginTop: '51px', marginBottom: '2px', padding: '2px', width: '49.8%' }}>
                                                             <div class="c-main_div img-dis">
                                                                 <img src={imagepath2} alt='' class="c-mask-image" style={{ border: '1px solid black' }}/>
                                                                 <div class="c-pattern-background-image" style={{
                                                                     backgroundImage: `url(${rowBackgrounds[index]})`,
                                                                 }}>
-
                                                                 </div>
                                                                 <p>{rowImageName[`${index}`]}</p>
                                                             </div>

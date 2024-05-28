@@ -130,7 +130,7 @@ function International() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm", "230mm");
+        setPageStyle("210mm", "238mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -252,16 +252,15 @@ function International() {
                                 </Col>
                             </div>
                         ))}
-                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
+                        <div id="pdf" style={{ display: "" }} className='w-100 '>
                             <div ref={componentRef}>
                                 <div class="container-wrapper c-main-content">
                                     <div class="container text-center">
                                         <div class="row">
                                             <div class="col">
-                                                <h1><img src={logo} alt='logo' width='10%'/></h1>
+                                                <h1><img src={logo} alt='logo' width='20%'/></h1>
                                                 <h1 className='c-text-style'>Textile Design</h1>
                                                 <h2 className='c-text-style c-text-style-h2'>{title}</h2>
-                                                <h3 className='c-text-style'>(IP)</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -307,8 +306,10 @@ function International() {
                                                                 )}
                                                                 <div class="c-text_rotate-bottom-second">7.5 INCHES</div>
                                                             </Col>
-                                                            : ' '}
-                                                        {imgIndex === 0 && (<div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>)}
+                                                             : ' '}
+
+                                                        {console.log("imgIndex",imgIndex)}
+                                                        {imgIndex === 1  && imagePreviews[`${imgKey}.${index}`] && <div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>}
                                                         {imagePreviews[`${imgKey}.${index}`] && (rowBackgrounds[`${index}`] !== imagePreviews[`${imgKey}.${index}`]) && (
                                                             <>
                                                                 <Col md={12} key={imgIndex} style={{ marginTop: '40px', marginBottom: '1px', padding: '2px' }}>
@@ -323,7 +324,7 @@ function International() {
                                                         )}
                                                     </>
                                                 ))}
-                                                <div class="c-text_rotate-bottom">7 INCHES</div>
+                                                {temp === 1 && <div class="c-text_rotate-bottom">7 INCHES</div>}
                                             </Row>
                                         </Col>
                                     </div>
