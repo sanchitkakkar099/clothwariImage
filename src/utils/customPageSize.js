@@ -1,8 +1,8 @@
-export const setPageStyle = (size) => {
-    console.log("size",size);
+export const setPageStyle = (width, height) => {
+    console.log("Page dimensions", width, height);
     let styleSheet = document.createElement("style");
     styleSheet.type = "text/css";
-    styleSheet.innerText = `@page { size: ${size}; margin: 0.2rem; }`;
+    styleSheet.innerText = `@page { size: ${width} ${height}; margin: 0.2rem; }`;
     styleSheet.id = "custom-page-style";
     document.head.appendChild(styleSheet);
   };

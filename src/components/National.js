@@ -3,8 +3,8 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { CloudLightning, Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath from '../images/MicrosoftTeams-image (14).png'
 import imagepath2 from '../images/MicrosoftTeams-image (8)-new.png'
+import logo from '../images/logoww (1).jpg'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
 import axios from 'axios'
@@ -15,7 +15,7 @@ function National() {
 
     const { control, handleSubmit, reset } = useForm({
         defaultValues: {
-            image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: ""}],
+            image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: "" , fifthimage: ""}],
         },
     });
 
@@ -104,11 +104,11 @@ function National() {
 
     const handleRemove = index => {
         const newImagePreviews = { ...imagePreviews };
-        ['firstimage', 'secondimage', 'thirdimage', 'forthimage'].forEach(imgKey => {
+        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].forEach(imgKey => {
             delete newImagePreviews[`${imgKey}.${index}`];
         });
         const newImageNames = { ...imageNames };
-        ['firstimage', 'secondimage', 'thirdimage', 'forthimage'].forEach(imgKey => {
+        ['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].forEach(imgKey => {
             delete newImageNames[`${imgKey}.${index}`];
         });
 
@@ -129,7 +129,7 @@ function National() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 245mm");
+        setPageStyle("355.6mm", "152mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -147,19 +147,19 @@ function National() {
                             <div className='mt-1'>
                                 National
                             </div>
-                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: ""})}>
+                            <Button color="primary" onClick={() => append({ firstimage: "", secondimage: "", thirdimage: "", forthimage: "", fifthimage: "" })}>
                                 <Plus size={14} />
                                 <span className="align-middle ms-25">Add Section</span>
                             </Button>
                         </div>
                     </CardHeader>
                     <CardBody className='d-flex flex-wrap '>
-                    <Input type='text' placeholder='Input Title' onChange={(e) => setTitle(e.target.value)} />
+                        <Input type='text' placeholder='Input Title' onChange={(e) => setTitle(e.target.value)} />
                         {fields.map((field, index) => (
                             <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
                                 <Col md={5}>
                                     <Row key={field.id} className="justify-content-between align-items-center">
-                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
+                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
                                             <Col md={12} key={imgIndex}>
                                                 <Label className="form-label" htmlFor={`${imgKey}.${index}.title`}>
                                                     {`Image ${imgIndex + 1}`}
@@ -198,6 +198,7 @@ function National() {
                                                             { label: "Image 2", value: `secondimage.${index}` },
                                                             { label: "Image 3", value: `thirdimage.${index}` },
                                                             { label: "Image 4", value: `forthimage.${index}` },
+                                                            { label: "Image 5", value: `fifthimage.${index}` },
                                                         ]}
                                                         className="react-select"
                                                         classNamePrefix="select"
@@ -221,7 +222,7 @@ function National() {
                                 {loading ? <LoaderComponet loading /> : " "}
                                 <Col md={7} style={{ paddingLeft: '1rem', paddingTop: '1rem' }}>
                                     <Row key={field.id} className="justify-content-between align-items-center gy-1">
-                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
+                                        {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
                                             <>
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div>
@@ -235,8 +236,8 @@ function National() {
                                                 </Col>
                                                 {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
-                                                        <div class="c-main_div img-dis">
-                                                            <img src={imagepath2} alt='' class="c-mask-image" />
+                                                        <div class="c-main_div img-dis" >
+                                                            <img src={imagepath2} alt='' class="c-mask-image"  style={{ border: '1px solid black' }}/>
                                                             <div class="c-pattern-background-image" style={{
                                                                 backgroundImage: `url(${rowBackgrounds[index]})`,
                                                             }}>
@@ -253,72 +254,50 @@ function National() {
                         ))}
                         <div id="pdf" style={{ display: "none" }} className='w-100 '>
                             <div ref={componentRef}>
-                            <div class="container-wrapper c-main-content" style={{ height:'900px' }}>
+                                <div class="container-wrapper c-main-content" style={{ height: '400px' }}>
                                     <div class="container text-center">
                                         <div class="row">
                                             <div class="col">
+                                                <h1><img src={logo} alt='logo' width='10%'/></h1>
                                                 <h1 className='c-text-style'>Textile Design</h1>
                                                 <h2 className='c-text-style c-text-style-h2'>{title}</h2>
-                                                <h3 className='c-text-style'>(IP)</h3>
+                                                <h3 className='c-text-style' style={{marginBottom : '40px'}}>(IP)</h3>
                                             </div>
                                         </div>
                                     </div>
                                     <span className='c-span_div-bott'></span>
                                 </div>
                                 {fields.map((field, index) => (
-                                    <div className="c-main">
-                                        <div class="box-item">
-                                            {['firstimage', 'secondimage', 'thirdimage', 'forthimage'].map((imgKey, imgIndex) => (
-                                                <>  {console.log("imgIndex", imgIndex)}
-                                                    {imagePreviews[`${imgKey}.${index}`] && imgIndex === 0 ?
-                                                        <div className="box-list">
-                                                            <div className="pattern-container c-side_img">
-                                                                <div className='img-dis c-side_box'>
-                                                                    <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
+                                    <Col md={12} style={{ paddingLeft: '8rem', paddingTop: '1rem', paddingRight: '8rem'}}>
+                                        <Row key={field.id} className="justify-content-between align-items-center gy-1">
+                                            {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
+                                                <>
+                                                    <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
+                                                        <div>
+                                                            {imagePreviews[`${imgKey}.${index}`] && (
+                                                                <div className='img-dis'>
+                                                                    <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
                                                                     <p>{imageNames[`${imgKey}.${index}`]}</p>
                                                                 </div>
-                                                            </div>
-                                                            <div className="pattern-container c-side_img">
-                                                                <div className='img-dis c-side_box'>
-                                                                    <img src={imagePreviews[`secondimage.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
-                                                                    <p>{imageNames[`secondimage.${index}`]}</p>
+                                                            )}
+                                                        </div>
+                                                    </Col>
+                                                    {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
+                                                        <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px', padding: '2px' }}>
+                                                            <div class="c-main_div img-dis">
+                                                                <img src={imagepath2} alt='' class="c-mask-image" style={{ border: '1px solid black' }}/>
+                                                                <div class="c-pattern-background-image" style={{
+                                                                    backgroundImage: `url(${rowBackgrounds[index]})`,
+                                                                }}>
+
                                                                 </div>
+                                                                <p>{rowImageName[`${index}`]}</p>
                                                             </div>
-                                                        </div> : ''}
-                                                    {imagePreviews[`${imgKey}.${index}`] && imgIndex === 1 ?
-                                                        <div className="box-list c-right-side-model">
-                                                            <div className="c-width c-side_model">
-                                                                <div class="c-main_div img-dis">
-                                                                    <img src={imagepath} alt='' class="c-mask-image" />
-                                                                    <div class="c-pattern-background-image-second" style={{
-                                                                        backgroundImage: `url(${rowBackgrounds[index]})`,
-                                                                    }}></div>
-                                                                    <p>{rowImageName[`${index}`]}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div> : ' '}
-                                                    {imagePreviews[`${imgKey}.${index}`] && imgIndex === 2 ?
-                                                        <div className="box-list">
-                                                            <div className="c-width c-bottom_img">
-                                                                <div className='img-dis '>
-                                                                    <img src={imagePreviews[`thirdimage.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
-                                                                    <p>{imageNames[`thirdimage.${index}`]}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div> : ''}
-                                                    {imagePreviews[`${imgKey}.${index}`] && imgIndex === 3 ?
-                                                        <div className="box-list">
-                                                            <div className="c-width c-bottom_img">
-                                                                <div className='img-dis '>
-                                                                    <img src={imagePreviews[`forthimage.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%' }} />
-                                                                    <p>{imageNames[`forthimage.${index}`]}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div> : ' '}
+                                                        </Col> : ''}
                                                 </>
                                             ))}
-                                        </div>
-                                    </div>
+                                        </Row>
+                                    </Col>
                                 ))}
                             </div>
                         </div>

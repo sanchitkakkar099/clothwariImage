@@ -3,6 +3,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";
 import { Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
+import logo from '../images/logoww (1).jpg'
 import imagepath from '../images/MicrosoftTeams-image (8)-new.png'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
@@ -38,7 +39,7 @@ function International() {
         if (file?.type === 'image/tiff' || file?.name?.endsWith('.tif')) {
             setLoading(true);
             try {
-                const response = await axios.post('http://65.0.108.107:3001/convert-tiff', formData, {
+                const response = await axios.post('http://65.0.108.107/convert-tiff', formData, {
                     responseType: 'blob'
                 });
                 setLoading(false);
@@ -129,7 +130,7 @@ function International() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("210mm 230mm");
+        setPageStyle("210mm", "230mm");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -257,6 +258,7 @@ function International() {
                                     <div class="container text-center">
                                         <div class="row">
                                             <div class="col">
+                                                <h1><img src={logo} alt='logo' width='10%'/></h1>
                                                 <h1 className='c-text-style'>Textile Design</h1>
                                                 <h2 className='c-text-style c-text-style-h2'>{title}</h2>
                                                 <h3 className='c-text-style'>(IP)</h3>
