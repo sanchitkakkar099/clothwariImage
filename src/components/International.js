@@ -129,6 +129,17 @@ function International() {
     const onNext = (state) => {
         // console.log("state", state);
     };
+
+    const getMarginButtom = (temp) =>{
+        if(temp===1){
+            return '51rem';
+        }else if (temp === 2){
+            return '28rem';
+        }else if( temp === 3){
+            return '5rem';
+        }
+        return 0;
+    }
     useEffect(() => {
         setPageStyle("210mm", "238mm");
     }, []);
@@ -298,7 +309,7 @@ function International() {
                                                                         <div className='img-dis'>
                                                                             <div className='c-border_style-a c-single_border_style'><span>A</span></div>
                                                                             <div className='c-box-item-3'>
-                                                                                <img src={rowBackgrounds[`${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
+                                                                                <img src={rowBackgrounds[`${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '96%', border: '1px solid black' }} />
                                                                                 <div className='c-text_rotate-second'><div><span> 10 </span><span> INCHES  </span></div></div>
                                                                             </div>
                                                                         </div>
@@ -307,9 +318,7 @@ function International() {
                                                                 <div class="c-text_rotate-bottom-second">7.5 INCHES</div>
                                                             </Col>
                                                              : ' '}
-
-                                                        {console.log("imgIndex",imgIndex)}
-                                                        {imgIndex === 1  && imagePreviews[`${imgKey}.${index}`] && <div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>}
+                                                        {imgIndex === 0  && (rowBackgrounds[`${index}`] !== imagePreviews[`${imgKey}.${index}`]) && <div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>}
                                                         {imagePreviews[`${imgKey}.${index}`] && (rowBackgrounds[`${index}`] !== imagePreviews[`${imgKey}.${index}`]) && (
                                                             <>
                                                                 <Col md={12} key={imgIndex} style={{ marginTop: '40px', marginBottom: '1px', padding: '2px' }}>
@@ -324,7 +333,7 @@ function International() {
                                                         )}
                                                     </>
                                                 ))}
-                                                {temp === 1 && <div class="c-text_rotate-bottom">7 INCHES</div>}
+                                                {temp >= 1 && <div class="c-text_rotate-bottom" style={{marginBottom:getMarginButtom(temp)}}>7 INCHES</div>}
                                             </Row>
                                         </Col>
                                     </div>

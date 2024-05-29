@@ -1,5 +1,5 @@
 export const setPageStyle = (width, height) => {
-    console.log("Page dimensions", width, height);
+    // console.log("Page dimensions", width, height);
     let styleSheet = document.createElement("style");
     styleSheet.type = "text/css";
     styleSheet.innerText = `

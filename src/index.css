@@ -173,12 +173,12 @@ body{
 .c-text_rotate-bottom-second::after {
   content: "";
   display: block;
-  width: 41%;
+  width: 40%;
   height: 2px;
   background-color: #000;
   position: absolute;
   top: 50%;
-  right: 39px;
+  right: 48px;
 }
 .c-text_rotate-bottom-second::before {
   content: "";
@@ -270,7 +270,7 @@ body{
 }
 
 .container-wrapper {
-  height: 1260px;
+  height: 1295px;
   display: flex;
   flex-direction: column;
   justify-content: center;

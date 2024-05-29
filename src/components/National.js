@@ -272,7 +272,7 @@ function National() {
                                             {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
                                                 <>
                                                 {imagePreviews[`${imgKey}.${index}`] && 
-                                                    <Col md={6} key={imgIndex} style={{ marginTop: '46px', marginBottom: '2px', padding: '2px', width: '49.5%' }}>
+                                                    <Col md={6} key={imgIndex} style={{ marginTop: '46px', marginBottom: '2px', padding: '2px', width: '49.8%' }}>
                                                         <div>                  
                                                                 <div className='img-dis'>
                                                                     <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
