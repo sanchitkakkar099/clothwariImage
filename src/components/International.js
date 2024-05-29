@@ -263,7 +263,7 @@ function International() {
                                 </Col>
                             </div>
                         ))}
-                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
+                        <div id="pdf" style={{ display: "" }} className='w-100 '>
                             <div ref={componentRef}>
                                 <div class="container-wrapper c-main-content">
                                     <div class="container text-center">
@@ -318,7 +318,8 @@ function International() {
                                                                 <div class="c-text_rotate-bottom-second">7.5 INCHES</div>
                                                             </Col>
                                                              : ' '}
-                                                        {imgIndex === 0  && (rowBackgrounds[`${index}`] !== imagePreviews[`${imgKey}.${index}`]) && <div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>}
+                                                        {console.log("imgIndex",imgIndex)}
+                                                        {imgIndex === 0  && imagePreviews[`secondimage.${index}`] && <div className='text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>}
                                                         {imagePreviews[`${imgKey}.${index}`] && (rowBackgrounds[`${index}`] !== imagePreviews[`${imgKey}.${index}`]) && (
                                                             <>
                                                                 <Col md={12} key={imgIndex} style={{ marginTop: '40px', marginBottom: '1px', padding: '2px' }}>
