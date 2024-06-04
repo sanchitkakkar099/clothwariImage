@@ -132,11 +132,11 @@ function International() {
 
     const getMarginButtom = (temp) =>{
         if(temp===1){
-            return '51rem';
+            return '35rem';
         }else if (temp === 2){
-            return '28rem';
+            return '18rem';
         }else if( temp === 3){
-            return '5rem';
+            return '1rem';
         }
         return 0;
     }
@@ -263,7 +263,7 @@ function International() {
                                 </Col>
                             </div>
                         ))}
-                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
+                        <div id="pdf" style={{ display: "" }} className='w-100 '>
                             <div ref={componentRef}>
                                 <div class="container-wrapper c-main-content">
                                     <div class="container text-center">
@@ -289,7 +289,7 @@ function International() {
                                                                 <div className='text-center fs-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
                                                                 <div class="c-main_div img-dis ">
                                                                 <div className='c-border_style-a c-single_border_style'><span>A</span></div>
-                                                                <div className='c-box-item-3'>
+                                                                <div className='c-box-item-3' >
                                                                     <div  style={{ border: '2px solid black' }}>
                                                                         <img src={imagepath} alt='' class="c-mask-image" />
                                                                         <div class="c-pattern-background-image c-pattern_back-ing" style={{
@@ -308,7 +308,7 @@ function International() {
                                                                         <div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
                                                                         <div className='img-dis'>
                                                                             <div className='c-border_style-a c-single_border_style'><span>A</span></div>
-                                                                            <div className='c-box-item-3'>
+                                                                            <div className='c-box-item-3 c-box_item-cover'>
                                                                                 <img src={rowBackgrounds[`${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '96%', border: '1px solid black' }} />
                                                                                 <div className='c-text_rotate-second'><div><span> 10 </span><span> INCHES  </span></div></div>
                                                                             </div>
@@ -322,10 +322,10 @@ function International() {
                                                         {imgIndex === 0  && imagePreviews[`secondimage.${index}`] && <div className='text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>}
                                                         {imagePreviews[`${imgKey}.${index}`] && (rowBackgrounds[`${index}`] !== imagePreviews[`${imgKey}.${index}`]) && (
                                                             <>
-                                                                <Col md={12} key={imgIndex} style={{ marginTop: '40px', marginBottom: '1px', padding: '2px' }}>
-                                                                    <div className='img-dis c-box-item-3'>
+                                                                <Col md={12} key={imgIndex} style={{ marginTop: '1px', marginBottom: '1px', padding: '2px' }}>
+                                                                    <div className='img-dis c-box-item-3 c-box_item-3-cover'>
                                                                         <div className='c-border_style-a'><span>{String.fromCharCode(66 + temp)}</span></div>
-                                                                        <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black', maxHeight: '336px', height: '100%', overflow: 'hidden', objectFit: 'cover' }} />
+                                                                        <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`}/>
                                                                         <div className='c-text_rotate'><div><span> 3.5 </span><span> INCHES  </span></div></div>
                                                                     </div>
                                                                 </Col>

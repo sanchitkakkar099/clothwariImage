@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
-import Select from "react-select";
+import Select from "react-select";  
 import { CloudLightning, Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
 import imagepath2 from '../images/MicrosoftTeams-image (8)-new.png'
@@ -11,16 +11,14 @@ import axios from 'axios'
 import LoaderComponet from "./LoderComponent";
 
 function National() {
-    const componentRef = useRef();
 
-    const { control, handleSubmit, reset } = useForm({
+    const componentRef = useRef();
+    const { control, handleSubmit } = useForm({
         defaultValues: {
             image_data: [{ firstimage: "", secondimage: "", thirdimage: "", forthimage: "" , fifthimage: ""}],
         },
     });
-
     const { fields, append, remove } = useFieldArray({ control, name: "image_data" });
-
     const [imagePreviews, setImagePreviews] = useState({});
     const [title, setTitle] = useState("");
     const [imageNames, setImageNames] = useState({});
@@ -52,7 +50,6 @@ function National() {
         } else if (file && file.type.startsWith('image')) {
             setLoading(true);
             const reader = new FileReader();
-
             reader.onload = (e) => {
                 if (file.type === 'image/jpeg') {
                     const img = new Image();
@@ -227,7 +224,7 @@ function National() {
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div>
                                                         {imagePreviews[`${imgKey}.${index}`] && (
-                                                            <div className='img-dis'>
+                                                            <div className='img-dis c-img_cover'>
                                                                 <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
                                                                 <p>{imageNames[`${imgKey}.${index}`]}</p>
                                                             </div>
@@ -236,7 +233,7 @@ function National() {
                                                 </Col>
                                                 {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px',  padding: '2px' }}>
-                                                        <div class="c-main_div img-dis" >
+                                                        <div class="c-main_div img-dis c-img_cover" >
                                                             <img src={imagepath2} alt='' class="c-mask-image"  style={{ border: '1px solid black' }}/>
                                                             <div class="c-pattern-background-image" style={{
                                                                 backgroundImage: `url(${rowBackgrounds[index]})`,
@@ -274,7 +271,7 @@ function National() {
                                                 {imagePreviews[`${imgKey}.${index}`] && 
                                                     <Col md={6} key={imgIndex} style={{ marginTop: '46px', marginBottom: '2px', padding: '2px', width: '49.8%' }}>
                                                         <div>                  
-                                                                <div className='img-dis'>
+                                                                <div className='img-dis c-img_cover'>
                                                                     <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
                                                                     <p>{imageNames[`${imgKey}.${index}`]}</p>
                                                                 </div>
@@ -283,7 +280,7 @@ function National() {
                                                 }
                                                     {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                         <Col md={6} key={imgIndex + 1} style={{ marginTop: '51px', marginBottom: '2px', padding: '2px', width: '49.8%' }}>
-                                                            <div class="c-main_div img-dis">
+                                                            <div class="c-main_div img-dis c-img_cover">
                                                                 <img src={imagepath2} alt='' class="c-mask-image" style={{ border: '1px solid black' }}/>
                                                                 <div class="c-pattern-background-image" style={{
                                                                     backgroundImage: `url(${rowBackgrounds[index]})`,

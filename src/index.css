@@ -18,8 +18,8 @@ body{
 .c-pattern-background-image{
   left: 2px;
     top: 1px;
-    width: 96%;
-    height: 94%;
+    width: 92%;
+    height: 92%;
     position: absolute;
     background-size: 18%;
     background-repeat: repeat;
@@ -127,7 +127,7 @@ body{
 .c-text_rotate-second div::before {
   content: "";
     display: block;
-    width: 636%;
+    width: 415%;
     height: 2px;
     background-color: #000;
     position: absolute;
@@ -173,7 +173,7 @@ body{
 .c-text_rotate-bottom-second::after {
   content: "";
   display: block;
-  width: 40%;
+  width: 38%;
   height: 2px;
   background-color: #000;
   position: absolute;
@@ -270,7 +270,7 @@ body{
 }
 
 .container-wrapper {
-  height: 1295px;
+  height: 901px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -308,6 +308,38 @@ span.c-span_div-bott {
 .c-pattern_back-ing {
   top: 65px;
 }
+.c-img_cover{
+  height: 521px;
+  width: 100%;
+}
+.c-img_cover img{
+  height: 100%;
+  object-fit: cover;
+}
+.c-box_item-cover{
+  height: 765px;
+  width: 100%;
+  overflow: hidden;
+}
+.c-box_item-cover img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.c-box_item-3-cover{
+  height: 272px;
+  width: 100%;
+  overflow: hidden;
+}
+.c-box_item-3-cover img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
 @media screen and (max-width: 600px) {
   .box-list {
       flex: 100%;
