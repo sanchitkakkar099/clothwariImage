@@ -263,7 +263,7 @@ function International() {
                                 </Col>
                             </div>
                         ))}
-                        <div id="pdf" style={{ display: "" }} className='w-100 '>
+                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
                             <div ref={componentRef}>
                                 <div class="container-wrapper c-main-content">
                                     <div class="container text-center">
