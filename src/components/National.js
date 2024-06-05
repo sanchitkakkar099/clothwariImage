@@ -256,7 +256,7 @@ function National() {
                                         <div class="row">
                                             <div class="col">
                                                 <h1><img src={logo} alt='logo' width='20%'/></h1>
-                                                <h1 className='c-text-style'>Textile Design</h1>
+                                                <h1 className='c-text-style'>Digital Print</h1>
                                                 <h2 className='c-text-style c-text-style-h2'>{title}</h2>
                                             </div>
                                         </div>
