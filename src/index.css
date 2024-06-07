@@ -297,7 +297,7 @@ span.c-span_div-bott {
   background-color: #bd582c;
   width: 102.5%;
   position: absolute;
-  bottom: -4.2%;
+  bottom: 0%;
   border-top: 8px solid #e48312;
 }
 .c-single_border_style{
@@ -309,7 +309,7 @@ span.c-span_div-bott {
   top: 65px;
 }
 .c-img_cover{
-  height: 521px;
+  height: 723px;
   width: 100%;
 }
 .c-img_cover img{

@@ -3,7 +3,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import Select from "react-select";  
 import { CloudLightning, Plus, X } from 'react-feather';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-import imagepath2 from '../images/MicrosoftTeams-image (8)-new.png'
+import imagepath2 from '../images/MicrosoftTeams-image (8)-whitespace.png'
 import logo from '../images/logoww (1).jpg'
 import { setPageStyle, removePageStyle } from '../utils/customPageSize';
 import { useReactToPrint } from "react-to-print";
@@ -126,7 +126,7 @@ function National() {
         // console.log("state", state);
     };
     useEffect(() => {
-        setPageStyle("1278px", "570px");
+        setPageStyle("1280px", "750px");
     }, []);
     const generatePDF = useReactToPrint({
         content: () => componentRef.current,
@@ -224,7 +224,7 @@ function National() {
                                                 <Col md={6} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                     <div>
                                                         {imagePreviews[`${imgKey}.${index}`] && (
-                                                            <div className='img-dis c-img_cover'>
+                                                            <div className='img-dis '>
                                                                 <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
                                                                 <p>{imageNames[`${imgKey}.${index}`]}</p>
                                                             </div>
@@ -233,7 +233,7 @@ function National() {
                                                 </Col>
                                                 {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                     <Col md={6} key={imgIndex + 1} style={{ marginTop: '5px',  padding: '2px' }}>
-                                                        <div class="c-main_div img-dis c-img_cover" >
+                                                        <div class="c-main_div img-dis " >
                                                             <img src={imagepath2} alt='' class="c-mask-image"  style={{ border: '1px solid black' }}/>
                                                             <div class="c-pattern-background-image" style={{
                                                                 backgroundImage: `url(${rowBackgrounds[index]})`,
@@ -249,9 +249,9 @@ function National() {
                                 </Col>
                             </div>
                         ))}
-                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
+                        <div id="pdf" style={{ display: "" }} className='w-100 '>
                             <div ref={componentRef}>
-                                <div class="container-wrapper c-main-content" style={{ height: '554px' }}>
+                                <div class="container-wrapper c-main-content" style={{ height: '760px' }}>
                                     <div class="container text-center">
                                         <div class="row">
                                             <div class="col">
@@ -269,7 +269,7 @@ function National() {
                                             {['firstimage', 'secondimage', 'thirdimage', 'forthimage', 'fifthimage'].map((imgKey, imgIndex) => (
                                                 <>
                                                 {imagePreviews[`${imgKey}.${index}`] && 
-                                                    <Col md={6} key={imgIndex} style={{ marginTop: '46px', marginBottom: '2px', padding: '2px', width: '49.8%' }}>
+                                                    <Col md={6} key={imgIndex} style={{ marginTop: '15px', marginBottom: '11px', padding: '2px', width: '49.8%' }}>
                                                         <div>                  
                                                                 <div className='img-dis c-img_cover'>
                                                                     <img src={imagePreviews[`${imgKey}.${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '100%', border: '1px solid black' }} />
@@ -279,10 +279,10 @@ function National() {
                                                     </Col>
                                                 }
                                                     {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
-                                                        <Col md={6} key={imgIndex + 1} style={{ marginTop: '51px', marginBottom: '2px', padding: '2px', width: '49.8%' }}>
+                                                        <Col md={6} key={imgIndex + 1} style={{ marginTop: '20px', marginBottom: '11px', padding: '2px', width: '49.8%' }}>
                                                             <div class="c-main_div img-dis c-img_cover">
                                                                 <img src={imagepath2} alt='' class="c-mask-image" style={{ border: '1px solid black' }}/>
-                                                                <div class="c-pattern-background-image" style={{
+                                                                <div class="c-pattern-background-image-second" style={{
                                                                     backgroundImage: `url(${rowBackgrounds[index]})`,
                                                                 }}>
                                                                 </div>
