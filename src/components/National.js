@@ -249,7 +249,7 @@ function National() {
                                 </Col>
                             </div>
                         ))}
-                        <div id="pdf" style={{ display: "" }} className='w-100 '>
+                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
                             <div ref={componentRef}>
                                 <div class="container-wrapper c-main-content" style={{ height: '760px' }}>
                                     <div class="container text-center">
