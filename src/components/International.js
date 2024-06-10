@@ -165,7 +165,7 @@ function International() {
                             </Button>
                         </div>
                     </CardHeader>
-                    <CardBody className='d-flex flex-wrap '>
+                    <CardBody className='d-flex flex-wrap'>
                         <Input type='text' placeholder='Input Title' onChange={(e) => setTitle(e.target.value)} />
                         {fields.map((field, index) => (
                             <div className="border-bottom border-dark border-2 pb-1 w-100 d-flex">
@@ -263,7 +263,7 @@ function International() {
                                 </Col>
                             </div>
                         ))}
-                        <div id="pdf" style={{ display: "none" }} className='w-100 '>
+                        <div id="pdf" style={{ display: "" }} className='w-100 '>
                             <div ref={componentRef}>
                                 <div class="container-wrapper c-main-content">
                                     <div class="container text-center">
@@ -287,7 +287,7 @@ function International() {
                                                         {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] ?
                                                             <Col md={12} key={imgIndex + 1} style={{ marginTop: '6px', padding: '2px' }}>
                                                                 <div className='text-center fs-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
-                                                                <div class="c-main_div img-dis ">
+                                                                <div class="c-main_div img-dis c-a_box_style-2">
                                                                 <div className='c-border_style-a c-single_border_style'><span>A</span></div>
                                                                 <div className='c-box-item-3' >
                                                                     <div  style={{ border: '2px solid black' }}>
@@ -296,17 +296,17 @@ function International() {
                                                                             backgroundImage: `url(${rowBackgrounds[index]})`,
                                                                         }}></div>
                                                                     </div>
-                                                                    <div className='c-text_rotate-second'><div><span> 10 </span><span> INCHES  </span></div></div>
+                                                                    <div className='c-text_rotate-first'><div><span> 10 </span><span> INCHES  </span></div></div>
                                                                 </div>
                                                                 </div>
-                                                                <div class="c-text_rotate-bottom-second">7.5 INCHES</div>
+                                                                <div class="c-text_rotate-bottom-first">7.5 INCHES</div>
                                                             </Col> : ''}
                                                         {imgIndex === 0 && imagePreviews[`${imgKey}.${index}`] && rowBackgrounds[index] ?
                                                             <Col md={12} key={imgIndex} style={{ marginTop: '0px', padding: '2px' }}>
                                                                 {imagePreviews[`${imgKey}.${index}`] && (
                                                                     <>
                                                                         <div className=' text-center fs-1 m-1'>Design No: {imageNames[`firstimage.${index}`]}</div>
-                                                                        <div className='img-dis'>
+                                                                        <div className='img-dis c-a_box-style'>
                                                                             <div className='c-border_style-a c-single_border_style'><span>A</span></div>
                                                                             <div className='c-box-item-3 c-box_item-cover'>
                                                                                 <img src={rowBackgrounds[`${index}`]} alt={`Preview ${imgIndex + 1}`} style={{ width: '96%', border: '1px solid black' }} />

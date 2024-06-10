@@ -19,7 +19,7 @@ body{
   left: 2px;
     top: 1px;
     width: 92%;
-    height: 92%;
+    height: 90%;
     position: absolute;
     background-size: 18%;
     background-repeat: repeat;
@@ -79,6 +79,14 @@ body{
   justify-content: center;
   width: 30px;
 }
+
+.c-text_rotate-first {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+}
+
 .c-text_rotate div{
   transform: rotate(270deg);
     text-align: center;
@@ -87,6 +95,14 @@ body{
     position: relative;
 }
 .c-text_rotate-second div{
+  transform: rotate(270deg);
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+
+.c-text_rotate-first div{
   transform: rotate(270deg);
     text-align: center;
     display: flex;
@@ -134,6 +150,27 @@ body{
     bottom: 42%;
     left: 114%;
 }
+
+.c-text_rotate-first div::after {
+  content: "";
+    display: block;
+    width: 630%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    right: 114%;
+}
+.c-text_rotate-first div::before {
+  content: "";
+    display: block;
+    width: 404%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    bottom: 42%;
+    left: 114%;
+}
 .c-text_rotate-bottom{
   /* display: flex;
     align-items: center;
@@ -145,7 +182,7 @@ body{
 .c-text_rotate-bottom::after {
   content: "";
     display: block;
-    width: 40%;
+    width: 39%;
     height: 2px;
     background-color: #000;
     position: absolute;
@@ -154,15 +191,44 @@ body{
 }
 .c-text_rotate-bottom::before {
   content: "";
-    display: block;
-    width: 39%;
-    height: 2px;
-    background-color: #000;
-    position: absolute;
-    bottom: 42%;
-    left: 51px;
+  display: block;
+  width: 36%;
+  height: 2px;
+  background-color: #000;
+  position: absolute;
+  bottom: 42%;
+  left: 70px
 }
+
 .c-text_rotate-bottom-second{
+  /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    text-align: center;
+    position: relative;
+}
+
+.c-text_rotate-bottom-first::after {
+  content: "";
+  display: block;
+  width: 38%;
+  height: 2px;
+  background-color: #000;
+  position: absolute;
+  top: 50%;
+  right: 42px;
+}
+.c-text_rotate-bottom-first::before {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 2px;
+  background-color: #000;
+  position: absolute;
+  bottom: 42%;
+  left: 25px;
+}
+.c-text_rotate-bottom-first{
   /* display: flex;
     align-items: center;
     justify-content: center; */
@@ -173,23 +239,24 @@ body{
 .c-text_rotate-bottom-second::after {
   content: "";
   display: block;
-  width: 38%;
+  width: 39%;
   height: 2px;
   background-color: #000;
   position: absolute;
   top: 50%;
-  right: 48px;
+  right: 33px;
 }
 .c-text_rotate-bottom-second::before {
   content: "";
   display: block;
-  width: 43%;
+  width: 39%;
   height: 2px;
   background-color: #000;
   position: absolute;
   bottom: 42%;
-  left: 1px;
+  left: 33px;
 }
+
 /* @media print {
   .page-break {
     margin-top: 1rem;
@@ -329,9 +396,11 @@ span.c-span_div-bott {
 }
 
 .c-box_item-3-cover{
-  height: 272px;
-  width: 100%;
-  overflow: hidden;
+  height: 266px;
+    width: 98%;
+    overflow: hidden;
+    margin-left: 2%;
+    margin-bottom: 1%;
 }
 .c-box_item-3-cover img{
   height: 100%;
@@ -339,7 +408,14 @@ span.c-span_div-bott {
   object-fit: cover;
   overflow: hidden;
 }
-
+.c-a_box-style{
+  width: 96%;
+  margin-left: 4%;
+}
+.c-a_box_style-2{
+  width: 97%;
+    margin-left: 3%;
+}
 @media screen and (max-width: 600px) {
   .box-list {
       flex: 100%;
