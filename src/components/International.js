@@ -147,7 +147,7 @@ function International() {
         content: () => componentRef.current,
         onAfterPrint: () => {
         },
-        documentTitle: "Documents",
+        documentTitle: `${title}`,
     });
 
     return (
