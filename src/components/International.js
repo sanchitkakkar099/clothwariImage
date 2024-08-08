@@ -136,7 +136,7 @@ function International() {
         }else if (temp === 2){
             return '18rem';
         }else if( temp === 3){
-            return '1rem';
+            return '0rem';
         }
         return 0;
     }
